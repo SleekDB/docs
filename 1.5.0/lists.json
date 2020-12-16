@@ -1,0 +1,23 @@
+[
+  "home.md",
+  "features.md",
+  "installation.md",
+  "getting-started.md",
+  "configurations.md",
+  "stores.md",
+  "insert-data.md",
+  "fetch-data.md",
+  "edit-data.md",
+  "delete-data.md",
+  "skip-limit.md",
+  "sort-data.md",
+  "search-data.md",
+  "cache-management.md",
+  "regenerate-cache.md",
+  "delete-cache.md",
+  "delete-all-cache.md",
+  "contributing.md",
+  "release-notes.md",
+  "contact.md",
+  "versions.md"
+]
