@@ -13,9 +13,14 @@ With SleekDB it is easy to join multiple stores.
 Example:
 
 ```php
-$usersStore->getQueryBuilder()->join(function($user) use ($commentsStore){
-  return $commentsStore->getQueryBuilder()->where("user", "=", $user["_id"]);
-}, "comments")->getQuery()->fetch();
+$usersStore->getQueryBuilder()
+  ->join(function($user) use ($commentsStore) {
+    return $commentsStore
+      ->getQueryBuilder()
+      ->where("user", "=", $user["_id"]);
+  }, "comments")
+  ->getQuery()
+  ->fetch();
 ```
 
 The above command would query into the "users" store to fetch all the data.
@@ -49,9 +54,13 @@ To get the users with their comments we would join like this:
 $usersStore = new \SleekDB\Store("users", $dataDir);
 $commentsStore = new \SleekDB\Store("comments", $dataDir);
 
-$users = $usersStore->getQueryBuilder()->join(function($user) use ($commentsStore){
-  return $commentsStore->getQueryBuilder()->where("userId", "=", $user["_id"]);
-}, "comments")->getQuery()->fetch();
+$users = $usersStore
+  ->getQueryBuilder()
+  ->join(function($user) use ($commentsStore){
+    return $commentsStore
+      ->getQueryBuilder()
+      ->where("userId", "=", $user["_id"]);
+  }, "comments")->getQuery()->fetch();
 ```
 
 You can use multiple `join()`.
@@ -64,13 +73,18 @@ $commentsStore = new \SleekDB\Store("comments", $dataDir);
 $articlesStore = new \SleekDB\Store("articles", $dataDir);
 
 $users = $usersStore->getQueryBuilder()
-  ->join(function($user) use ($commentsStore){
-    return $commentsStore->getQueryBuilder()->where("userId", "=", $user["_id"]);
+  ->join(function($user) use ($commentsStore) {
+    return $commentsStore
+      ->getQueryBuilder()
+      ->where("userId", "=", $user["_id"]);
   }, "comments")
-  ->join(function($user) use ($articleStore){
-    return $articleStore->getQueryBuilder()->where("author", "=", $user["_id"]);
+  ->join(function($user) use ($articleStore) {
+    return $articleStore
+      ->getQueryBuilder()
+      ->where("author", "=", $user["_id"]);
   }, "articles")
-  ->getQuery()->fetch();
+  ->getQuery()
+  ->fetch();
 ```
 
 You can use `join()` within a join sub query.
@@ -82,13 +96,18 @@ $usersStore = new \SleekDB\Store("users", $dataDir);
 $commentsStore = new \SleekDB\Store("comments", $dataDir);
 $articlesStore = new \SleekDB\Store("articles", $dataDir);
 
-$users = $usersStore->getQueryBuilder()
+$users = $usersStore
+  ->getQueryBuilder()
   ->join(function($user) use ($articleStore){
-    return $articleStore->getQueryBuilder()
+    return $articleStore
+      ->getQueryBuilder()
       ->where("author", "=", $user["_id"])
       ->join(function($article) use ($commentsStore){
-        return $commentsStore->getQueryBuilder()->where("articleId", "=", $article["_id"]);
+        return $commentsStore
+          ->getQueryBuilder()
+          ->where("articleId", "=", $article["_id"]);
       }, "comments");
   }, "articles")
-  ->getQuery()->fetch();
+  ->getQuery()
+  ->fetch();
 ```

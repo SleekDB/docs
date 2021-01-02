@@ -13,7 +13,10 @@ To get data from the store we use the `fetch()`, `first()` or `exists()` method 
 Example:
 
 ```php
-$usersStore->getQueryBuilder()->getQuery()->fetch();
+$usersStore
+  ->getQueryBuilder()
+  ->getQuery()
+  ->fetch();
 ```
 
 The above command would query into the "users" store to fetch all the data.
@@ -73,7 +76,11 @@ where( string $fieldName, string $condition, mixed $value ): QueryBuilder;
 To only get the user whose country is equal to "England" we would query like this:
 
 ```php
-$users = $usersStore->getQueryBuilder()->where( 'name', '=', 'Joshua Edwards' )->getQuery()->fetch();
+$users = $usersStore
+  ->getQueryBuilder()
+  ->where( 'name', '=', 'Joshua Edwards' )
+  ->getQuery()
+  ->fetch();
 ```
 
 You can use multiple `where()` conditions.
@@ -130,7 +137,12 @@ $users = $usersStore->getQueryBuilder()
 ```php
 $users = $usersStore->getQueryBuilder()
     ->where( 'products.totalSaved', '>', 10 )
-    ->orWhere( [ ['products.totalBought', '>', 20], [ 'products.shipped', '=', 1 ] ] )
+    ->orWhere(
+      [
+        ['products.totalBought', '>', 20],
+        [ 'products.shipped', '=', 1 ]
+      ]
+    )
     ->getQuery()
     ->fetch();
 ```
@@ -158,7 +170,11 @@ in(string $fieldName, array $values = []): QueryBuilder;
 **Example:**
 
 ```php
-$users = $usersStore->getQueryBuilder()->in('country', ['BD', 'CA', 'SE', 'NA'])->getQuery()->fetch();
+$users = $usersStore
+  ->getQueryBuilder()
+  ->in('country', ['BD', 'CA', 'SE', 'NA'])
+  ->getQuery()
+  ->fetch();
 ```
 
 ### notIn()
@@ -177,7 +193,11 @@ notIn(string $fieldName, array $values = []): QueryBuilder;
 **Example:**
 
 ```php
-$users = $usersStore->getQueryBuilder()->notIn('country', ['IN', 'KE', 'OP'])->getQuery()->fetch();
+$users = $usersStore
+  ->getQueryBuilder()
+  ->notIn('country', ['IN', 'KE', 'OP'])
+  ->getQuery()
+  ->fetch();
 ```
 
 **Multiple notIn clause example with nested properties:**
@@ -203,7 +223,11 @@ select(array $fieldNames): QueryBuilder
 **Example:**
 
 ```php
-$users = $usersStore->getQueryBuilder()->select(['name'])->getQuery()->fetch();
+$users = $usersStore
+  ->getQueryBuilder()
+  ->select(['name'])
+  ->getQuery()
+  ->fetch();
 // output: [["_id": 1, "name": "Max"], ["_id": 2, "name": "Hasan"]]
 ```
 
@@ -220,6 +244,10 @@ except(array $fieldNames): QueryBuilder
 **Example:**
 
 ```php
-$users = $usersStore->getQueryBuilder()->except(['_id', 'name'])->getQuery()->fetch();
+$users = $usersStore
+  ->getQueryBuilder()
+  ->except(['_id', 'name'])
+  ->getQuery()
+  ->fetch();
 // output: [["age": 28], ["age": 18]]
 ```

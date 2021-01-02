@@ -24,7 +24,10 @@ $updateable = [
         'totalBought' => 1
     ]
 ];
-$usersStore->getQueryBuilder()->where( 'name', '=', 'Joshua Edwards' )->getQuery()->update( $updateable );
+$usersStore->getQueryBuilder()
+    ->where('name', '=', 'Joshua Edwards')
+    ->getQuery()
+    ->update( $updateable );
 ```
 
 You can use more than one where condition if required.
