@@ -27,7 +27,7 @@ To filter data we use the where() method of the QueryBuilder object.
 The where() method takes three arguments, those are:
 
 ```php
-where( string $fieldName, string $condition, $value ): QueryBuilder;
+where( string $fieldName, string $condition, mixed $value ): QueryBuilder;
 ```
 
 1. # $fieldName
@@ -54,11 +54,16 @@ where( string $fieldName, string $condition, $value ): QueryBuilder;
    - `<=` Match less equal against data.
    - `like` Match using wildcards. \
      Supported wildcards:
-     - `%` Represents zero or more characters
-     - `_` Represents a single character
-     - `[]` Represents any single character within the brackets
-     - `^` Represents any character not in the brackets
-     - `-` Represents a range of characters
+     - `%` Represents zero or more characters \
+       Example: bl% finds bl, black, blue, and blob
+     - `_` Represents a single character \
+       Example: h_t finds hot, hat, and hit
+     - `[]` Represents any single character within the brackets \
+       Example: h[oa]t finds hot and hat, but not hit
+     - `^` Represents any character not in the brackets \
+       Example: h[^oa]t finds hit, but not hot and hat
+     - `-` Represents a range of characters \
+       Example: c[a-b]t finds cat and cbt
 
 3. # $value
    Data to be used as against the property value of the JSON documents.
@@ -90,13 +95,13 @@ $users = $usersStore->getQueryBuilder()
 The `orWhere()` method takes three arguments same as `where()` condition, those are:
 
 ```php
-orWhere( string $fieldName, string $condition, $value ): QueryBuilder;
+orWhere( string $fieldName, string $condition, mixed $value ): QueryBuilder;
 ```
 
 You can also specify one or multiple where conditions within one or-where condition as an array. These where conditions then are connected with an "and".
 
 ```php
-orWhere( [[string $fieldName, string $condition, $value], [string $fieldName, string $condition, $value], ...] );
+orWhere( [[string $fieldName, string $condition, mixed $value], [string $fieldName, string $condition, $value], ...] );
 ```
 
 **Example:**

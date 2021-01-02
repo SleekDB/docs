@@ -25,7 +25,7 @@
   If you write this where clause:
 
   ```php
-  where( 'post.author.role' '=', 'admin' )
+  where( 'post.author.role', '=', 'admin' )
   ```
 
   SleekDB will look for data at:

@@ -13,7 +13,7 @@ To edit a data object we would use the `update()` method.
 The update method takes only one argument.
 
 ```php
-function update(array $updatable): bool;
+update(array $updatable): bool;
 ```
 
 Lets update the "totalBought" value of a user whose name is "Joshua Edwards"
@@ -24,7 +24,7 @@ $updateable = [
         'totalBought' => 1
     ]
 ];
-$usersDB->where( 'name', '=', 'Joshua Edwards' )->update( $updateable );
+$usersStore->getQueryBuilder()->where( 'name', '=', 'Joshua Edwards' )->getQuery()->update( $updateable );
 ```
 
 You can use more than one where condition if required.

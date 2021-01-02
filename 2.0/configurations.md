@@ -40,7 +40,7 @@ Available caching method's are:
 
 The `cache_lifetime` is set to `null` by default!
 
-Can be an `int >= 0` in seconds or `null`.
+Can be an `int >= 0`, that specifies the lifetime in seconds, or `null` to define that there is no lifetime.
 
 This specifies the default cache time to live store wide.
 
