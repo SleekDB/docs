@@ -21,7 +21,7 @@
 - # Query on nested properties
 
   Supports filter and conditions on nested properties of the JSON documents!
-  
+
   If you write this where clause:
 
   ```php
@@ -66,4 +66,6 @@
 
 - # Actively maintained
 
-  SleekDB is actively maintained by <a href="https://twitter.com/rakibtg" target="_blank">@rakibtg</a>. For support and other requirements <a class="gotoblock" href="#contact">contact</a>.
+  SleekDB is actively maintained by <a rel="noopener nofollow" href="https://twitter.com/rakibtg" target="_blank">@rakibtg</a> and <a rel="noopener nofollow" href="https://www.goodsoft.de" target="_blank">Timu</a>.
+
+  For support and other requirements <a class="gotoblock" href="#contact">contact</a>.

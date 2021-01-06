@@ -33,8 +33,13 @@ This tells SleekDB to use the build in caching system.
 To disable build in caching set `auto_cache` to `false` in the config array.
 
 Note that you can manually manage caching on a query by query base with methods that SleekDB provides.
-Available caching method's are: 
-`QueryBuilder->regenerateCache()`, `QueryBuilder->useCache()`, `QueryBuilder->disableCache()`, `QueryBuilder->deleteCache()` and `deleteAllCache()`
+Available caching method's are:
+
+- `QueryBuilder->regenerateCache()`
+- `QueryBuilder->useCache()`
+- `QueryBuilder->disableCache()`
+- `QueryBuilder->deleteCache()`
+- `deleteAllCache()`
 
 ### cache_lifetime
 
