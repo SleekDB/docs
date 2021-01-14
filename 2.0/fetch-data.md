@@ -8,18 +8,18 @@
 
 # Fetch Data
 
-To get data from the store we use the `fetch()`, `first()` or `exists()` method the Query Object.
+To get data from the store we use the `fetch()`, `first()` or `exists()` method from the instantiated object of the `Query` class.
 
 Example:
 
 ```php
-$usersStore
+$userStore
   ->getQueryBuilder()
   ->getQuery()
   ->fetch();
 ```
 
-The above command would query into the "users" store to fetch all the data.
+The above command would query into the "users" store to fetch all the data available in the store.
 
 ## Apply Filters and Conditions
 
@@ -47,7 +47,7 @@ where( string $fieldName, string $condition, mixed $value ): QueryBuilder;
 
    To apply the comparison filters we use this argument.
 
-   Allowed comparisonal conditions are:
+   Allowed conditional operators are:
 
    - `=` Match equal against data.
    - `!=` Match not equal against data.
@@ -76,9 +76,9 @@ where( string $fieldName, string $condition, mixed $value ): QueryBuilder;
 To only get the user whose country is equal to "England" we would query like this:
 
 ```php
-$users = $usersStore
+$users = $userStore
   ->getQueryBuilder()
-  ->where( 'name', '=', 'Joshua Edwards' )
+  ->where( "name", "=", "Joshua Edwards" )
   ->getQuery()
   ->fetch();
 ```
@@ -88,11 +88,12 @@ You can use multiple `where()` conditions.
 Example:
 
 ```php
-$users = $usersStore->getQueryBuilder()
-    ->where( 'products.totalSaved', '>', 10 )
-    ->where( 'products.totalBought', '>', 20 )
-    ->getQuery()
-    ->fetch();
+$users = $userStore
+  ->getQueryBuilder()
+  ->where( "products.totalSaved", ">", 10 )
+  ->where( "products.totalBought", ">", 20 )
+  ->getQuery()
+  ->fetch();
 ```
 
 ### orWhere()
@@ -114,37 +115,40 @@ orWhere( [[string $fieldName, string $condition, mixed $value], [string $fieldNa
 **Example:**
 
 ```php
-$users = $usersStore->getQueryBuilder()
-    ->where( 'products.totalSaved', '>', 10 )
-    ->orWhere( 'products.totalBought', '>', 20 )
-    ->getQuery()
-    ->fetch();
+$users = $userStore
+  ->getQueryBuilder()
+  ->where( "products.totalSaved", ">", 10 )
+  ->where( "products.totalBought", ">", 20 )
+  ->getQuery()
+  ->fetch();
 ```
 
 **Multiple orWhere clause example:**
 
 ```php
-$users = $usersStore->getQueryBuilder()
-    ->where( 'products.totalSaved', '>', 10 )
-    ->orWhere( 'products.totalBought', '>', 20 )
-    ->orWhere( 'products.shipped', '=', 1 )
-    ->getQuery()
-    ->fetch();
+$users = $userStore
+  ->getQueryBuilder()
+  ->where( "products.totalSaved", ">", 10 )
+  ->where( "products.totalBought", ">", 20 )
+  ->orWhere( "products.shipped", "=", 1 )
+  ->getQuery()
+  ->fetch();
 ```
 
 **One orWhere with multiple where clause, which are connected with and example:**
 
 ```php
-$users = $usersStore->getQueryBuilder()
-    ->where( 'products.totalSaved', '>', 10 )
-    ->orWhere(
-      [
-        ['products.totalBought', '>', 20],
-        [ 'products.shipped', '=', 1 ]
-      ]
-    )
-    ->getQuery()
-    ->fetch();
+$users = $userStore
+  ->getQueryBuilder()
+  ->where( "products.totalSaved", ">", 10 )
+  ->orWhere(
+    [
+      [ "products.totalBought", ">", 20 ],
+      [ "products.shipped", "=", 1 ]
+    ]
+  )
+  ->getQuery()
+  ->fetch();
 ```
 
 ### in()
@@ -170,9 +174,9 @@ in(string $fieldName, array $values = []): QueryBuilder;
 **Example:**
 
 ```php
-$users = $usersStore
+$users = $userStore
   ->getQueryBuilder()
-  ->in('country', ['BD', 'CA', 'SE', 'NA'])
+  ->in("country", ["BD", "CA", "SE", "NA"])
   ->getQuery()
   ->fetch();
 ```
@@ -193,9 +197,9 @@ notIn(string $fieldName, array $values = []): QueryBuilder;
 **Example:**
 
 ```php
-$users = $usersStore
+$users = $userStore
   ->getQueryBuilder()
-  ->notIn('country', ['IN', 'KE', 'OP'])
+  ->notIn("country", ["IN", "KE", "OP"])
   ->getQuery()
   ->fetch();
 ```
@@ -203,16 +207,17 @@ $users = $usersStore
 **Multiple notIn clause example with nested properties:**
 
 ```php
-$users = $usersStore->getQueryBuilder()
-    ->notIn('country', ['IN', 'KE', 'OP'])
-    ->notIn('products.totalSaved', [100, 150, 200])
-    ->getQuery()
-    ->fetch();
+$users = $userStore
+  ->getQueryBuilder()
+  ->notIn("country", ["IN", "KE", "OP"])
+  ->notIn("products.totalSaved", [100, 150, 200])
+  ->getQuery()
+  ->fetch();
 ```
 
 ### select()
 
-With select(...) you can specify specific fields that to output, like after the SELECT keyword in SQL. SleekDB supports multiple select() as object chain for multiple fields.
+With select(...) you can specify specific fields that to output, like after the SELECT keyword in SQL. SleekDB supports multiple `select()` as object chain for multiple fields.
 
 The select() method takes one argument:
 
@@ -223,7 +228,7 @@ select(array $fieldNames): QueryBuilder
 **Example:**
 
 ```php
-$users = $usersStore
+$users = $userStore
   ->getQueryBuilder()
   ->select(['name'])
   ->getQuery()
@@ -233,7 +238,7 @@ $users = $usersStore
 
 ### except()
 
-except(...) works as the opposite of select() method.
+`except(...)` works as the opposite of `select()` method. Use it when you don't want a property with the data returned. For example, if you don't want the password field in your returned data set then use this method.
 
 The except() method takes one argument:
 
@@ -244,10 +249,66 @@ except(array $fieldNames): QueryBuilder
 **Example:**
 
 ```php
-$users = $usersStore
+$users = $userStore
   ->getQueryBuilder()
-  ->except(['_id', 'name'])
+  ->except(["_id", "name"])
   ->getQuery()
   ->fetch();
 // output: [["age": 28], ["age": 18]]
+```
+
+### first()
+
+Returns the very first document discovered. It is more efficient than `fetch` but one caveat is that the `orderBy` will not work when you this method to get the very first item.
+
+```php
+first(): QueryBuilder
+```
+
+**Example:**
+
+```php
+$users = $userStore
+  ->getQueryBuilder()
+  ->where("email", "=", "foo@bar.com")
+  ->getQuery()
+  ->first();
+```
+
+### exists()
+
+Returns boolean `true` if data exists, `false` if data does not exists. It is more efficient than using `fetch` to check if some data exists or not. For example, you may use exists method to check if a username or email address is unique or not.
+
+```php
+exists(): QueryBuilder
+```
+
+**Example:**
+
+```php
+$usernameUniqueness = $userStore
+  ->getQueryBuilder()
+  ->where("username", "=", "foobar")
+  ->getQuery()
+  ->exists();
+```
+
+### distinct()
+
+The distinct method is used to retrieve unique values from the store. It will remove all the duplicate documents while fetching data from a store.
+
+The distinct() method takes only one argument,
+
+```php
+distinct( array|string $fields ): QueryBuilder;
+```
+
+**Example:**
+
+```php
+$distinctUsers = $userStore
+  ->getQueryBuilder()
+  ->distinct(["name"])
+  ->getQuery()
+  ->fetch()
 ```

@@ -8,21 +8,27 @@
 
 # Configurations
 
-SleekDB allows three configuration options, which are "auto_cache", "cache_lifetime" and "timeout". Configurations should be passed as an array in the third parameter while instantiating a SleekDB Store. This configuration is store wide and will be used on every query.
+SleekDB allows few configuration options, which are
+
+- auto_cache
+- cache_lifetime
+- timeout
+
+Configurations should be passed as an array in the third parameter while instantiating a SleekDB Store. This configurations are store wide available and will be used on every query by default.
 
 ## Using Custom Configuration
 
 You should pass the configurations array in the third parameter, example:
 
 ```php
-$newsStore = new \SleekDB\Store('news', $dataDir, [
-  'auto_cache' => true,
-  'cache_lifetime' => null,
-  'timeout' => 120
+$newsStore = new \SleekDB\Store("news", $dataDir, [
+  "auto_cache" => true,
+  "cache_lifetime" => null,
+  "timeout" => 120
 ]);
 ```
 
-Let's talk about what this configurations do.
+Let's get familiarized with available configuration properties.
 
 ### auto_cache
 
@@ -39,7 +45,7 @@ Available caching method's are:
 - `QueryBuilder->useCache()`
 - `QueryBuilder->disableCache()`
 - `QueryBuilder->deleteCache()`
-- `deleteAllCache()`
+- `QueryBuilder->deleteAllCache()`
 
 ### cache_lifetime
 
@@ -49,13 +55,15 @@ Can be an `int >= 0`, that specifies the lifetime in seconds, or `null` to defin
 
 This specifies the default cache time to live store wide.
 
-If set to null the cache files made with that store instance will have no lifetime and will be regenerated on every insert/update/delete.
+If set to null the cache files made with that store instance will have no lifetime and will be regenerated on every insert/update/delete operations.
 
-0 means infinite.
+> `0` means infinite.
 
 Note that you can specify the cache lifetime on a query by query base by using the useCache method of the QueryBuilder and passing a lifetime.
 
-`QueryBuilder->useCache($lifetime)`
+- `QueryBuilder->useCache($lifetime)`
+
+> Note: You will find more details on caching at <a class="gotoblock" href="/#/cache-management">Cache Management</a>
 
 ### timeOut
 

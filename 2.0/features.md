@@ -10,17 +10,17 @@
 
 ## Installing SleekDB
 
-- # Light-weight, faster
+- # Lightweight, faster
 
-  Stores data in plain-text utilizing JSON format, no binary conversion needed to store or fetch the data.
+  Stores data in plain-text utilizing JSON format, no binary conversion needed to store or fetch the data. Default query cache layer.
 
 - # Schema free data storage
 
-  SleekDB does not require any schema meaning you can insert any types of data you want.
+  SleekDB does not require any schema so you can insert any types of data you want.
 
 - # Query on nested properties
 
-  Supports filter and conditions on nested properties of the JSON documents!
+  As it supports schema free data so you can filter and use conditions on nested properties of the JSON documents!
 
   If you write this where clause:
 
@@ -46,11 +46,29 @@
 
 - # Default caching layer
 
-  SleekDB will serve data from cache by default and regenerate cache automatically!
+  SleekDB will serve data from cache by default and regenerate cache automatically! Query results will be cached and later reused from a single file instead of travarsing all the available files.
 
-- # Filters: where, in, notIn, orWhere, sort, skip, limit and search ...
+- # Rich Conditions and Filters
 
-  Use multiple conditional comparisons, text search, sorting on multiple properties and nested properties.
+  Use multiple conditional comparisons, text search, sorting on multiple properties and nested properties. Some useful methods are:
+
+  - where
+  - join
+  - in
+  - notIn
+  - like
+  - orWhere
+  - sort
+  - skip
+  - limit
+  - search
+  - distinct
+  - exists
+  - first
+
+- # Process data on demand
+
+  SleekDB does not require any background process or network protocol in order to process data when you use it in a PHP project. All data for a query will be fetched runtime within the same PHP process.
 
 - # Runs everywhere
 
@@ -66,6 +84,8 @@
 
 - # Actively maintained
 
-  SleekDB is actively maintained by <a rel="noopener nofollow" href="https://twitter.com/rakibtg" target="_blank">@rakibtg</a> and <a rel="noopener nofollow" href="https://www.goodsoft.de" target="_blank">Timu</a>.
+  SleekDB is created by <a rel="noopener nofollow" href="https://twitter.com/rakibtg" target="_blank">@rakibtg</a> who is using it in various types of applications which are in production right now. Our another contributor and active maintainer is <a rel="noopener nofollow" href="https://www.goodsoft.de" target="_blank">Timu</a> who is making SleekDB much better in terms of code quality and new features.
 
-  For support and other requirements <a class="gotoblock" href="#contact">contact</a>.
+- # Support
+
+  For support and other requirements <a class="gotoblock" href="#/contact">contact</a>.

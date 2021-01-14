@@ -8,12 +8,13 @@
 
 # Join Stores
 
-With SleekDB it is easy to join multiple stores.
+With SleekDB it is easy to join multiple stores. You can add more than one `join` as well as nested `join` methods are also supported!
 
 Example:
 
 ```php
-$usersStore->getQueryBuilder()
+$userStore
+  ->getQueryBuilder()
   ->join(function($user) use ($commentsStore) {
     return $commentsStore
       ->getQueryBuilder()
@@ -51,16 +52,18 @@ join(callable $joinFunction, string $dataPropertyName): QueryBuilder
 To get the users with their comments we would join like this:
 
 ```php
-$usersStore = new \SleekDB\Store("users", $dataDir);
+$userStore = new \SleekDB\Store("users", $dataDir);
 $commentsStore = new \SleekDB\Store("comments", $dataDir);
 
-$users = $usersStore
+$users = $userStore
   ->getQueryBuilder()
   ->join(function($user) use ($commentsStore){
     return $commentsStore
       ->getQueryBuilder()
       ->where("userId", "=", $user["_id"]);
-  }, "comments")->getQuery()->fetch();
+  }, "comments")
+  ->getQuery()
+  ->fetch();
 ```
 
 You can use multiple `join()`.
@@ -68,11 +71,12 @@ You can use multiple `join()`.
 Example:
 
 ```php
-$usersStore = new \SleekDB\Store("users", $dataDir);
+$userStore = new \SleekDB\Store("users", $dataDir);
 $commentsStore = new \SleekDB\Store("comments", $dataDir);
 $articlesStore = new \SleekDB\Store("articles", $dataDir);
 
-$users = $usersStore->getQueryBuilder()
+$users = $userStore
+  ->getQueryBuilder()
   ->join(function($user) use ($commentsStore) {
     return $commentsStore
       ->getQueryBuilder()
@@ -92,11 +96,11 @@ You can use `join()` within a join sub query.
 Example:
 
 ```php
-$usersStore = new \SleekDB\Store("users", $dataDir);
+$userStore = new \SleekDB\Store("users", $dataDir);
 $commentsStore = new \SleekDB\Store("comments", $dataDir);
 $articlesStore = new \SleekDB\Store("articles", $dataDir);
 
-$users = $usersStore
+$users = $userStore
   ->getQueryBuilder()
   ->join(function($user) use ($articleStore){
     return $articleStore

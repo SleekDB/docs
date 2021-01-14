@@ -8,7 +8,7 @@
 
 # Cache Management
 
-The `useCache()` method would return the data from the cache storage, if cache dosent exists then it would fetch the result then creates the cache for later use and return the data. Example,
+The `useCache()` method would return the data from the cache storage, if cache doesn't exists then it would fetch the result then creates the cache for later use and return the data. Example,
 
 ```php
 $user = $usersDB

@@ -19,15 +19,16 @@ update(array $updatable): bool;
 Lets update the "totalBought" value of a user whose name is "Joshua Edwards"
 
 ```php
-$updateable = [
+$updatable = [
     'products' => [
         'totalBought' => 1
     ]
 ];
-$usersStore->getQueryBuilder()
+$usersStore
+    ->getQueryBuilder()
     ->where('name', '=', 'Joshua Edwards')
     ->getQuery()
-    ->update( $updateable );
+    ->update( $updatable );
 ```
 
 You can use more than one where condition if required.
