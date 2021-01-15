@@ -8,17 +8,17 @@
 
 # Configurations
 
-SleekDB allows few configuration options, which are
+SleekDB allows a few configuration options, which are
 
 - auto_cache
 - cache_lifetime
 - timeout
 
-Configurations should be passed as an array in the third parameter while instantiating a SleekDB Store. This configurations are store wide available and will be used on every query by default.
+They are store wide, which means they will be used on every query, if not changed on a query by query base.
 
 ## Using Custom Configuration
 
-You should pass the configurations array in the third parameter, example:
+You can pass the configurations array as a third parameter when initializing the Store object:
 
 ```php
 $newsStore = new \SleekDB\Store("news", $dataDir, [
@@ -28,7 +28,7 @@ $newsStore = new \SleekDB\Store("news", $dataDir, [
 ]);
 ```
 
-Let's get familiarized with available configuration properties.
+Let's get familiar with the available configuration options.
 
 ### auto_cache
 
@@ -44,8 +44,6 @@ Available caching method's are:
 - `QueryBuilder->regenerateCache()`
 - `QueryBuilder->useCache()`
 - `QueryBuilder->disableCache()`
-- `QueryBuilder->deleteCache()`
-- `QueryBuilder->deleteAllCache()`
 
 ### cache_lifetime
 
@@ -55,11 +53,11 @@ Can be an `int >= 0`, that specifies the lifetime in seconds, or `null` to defin
 
 This specifies the default cache time to live store wide.
 
-If set to null the cache files made with that store instance will have no lifetime and will be regenerated on every insert/update/delete operations.
+If set to null the cache files made with that store instance will have no lifetime and will be regenerated on every insert/update/delete operation.
 
-> `0` means infinite.
+> `0` means infinite lifetime.
 
-Note that you can specify the cache lifetime on a query by query base by using the useCache method of the QueryBuilder and passing a lifetime.
+Note that you can specify the cache lifetime on a query by query base by using the useCache method of the QueryBuilder and pass a lifetime.
 
 - `QueryBuilder->useCache($lifetime)`
 
@@ -67,4 +65,4 @@ Note that you can specify the cache lifetime on a query by query base by using t
 
 ### timeOut
 
-Set timeout value, default value is `120` second.
+Set timeout value. Default value is `120` seconds.
