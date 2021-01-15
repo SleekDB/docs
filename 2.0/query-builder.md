@@ -8,87 +8,135 @@
 
 # QueryBuilder
 
-The QueryBuilder is used to prepare more complex queries. You can create QueryBuilder with the `createQueryBuilder()` method of the `Store` class.
+The QueryBuilder is used to **prepare more complex queries**, **`not to execute the query!`**. You can create a QueryBuilder with the `createQueryBuilder()` method of the `Store` class.
 
 ```php
 $userQueryBuilder = $userStore->createQueryBuilder();
 ```
 
-The above command would query into the "users" store to fetch all the data available in the store.
+## getQuery()
 
-## Apply Filters and Conditions
-
-### where()
-
-To filter data we use the where() method of the QueryBuilder object.
-
-The where() method takes three arguments, those are:
+With the `getQuery` method of the QueryBuilder class you can **`retrieve the Query object to execute the query`**.
 
 ```php
-where( string $fieldName, string $condition, mixed $value ): QueryBuilder;
+function getQuery(): Query
 ```
 
-1. # $fieldName
+The most important methods of the Query class to execute a query are:
+  * # fetch()
+    Retrieve multiple documents
+  * # first()
+    Retrieve first found document
+  * # exists()
+    Check if a document for given query exist
+  * # delete()
+    Delete all documents that are found with given query
+  * # update()
+    Update all documents that are found with given query
 
-   The field name argument is the property that we want to check in our data object.
+For more details on query execution please visit the <a class="gotoblock" href="#/query">Query</a> page.
 
-   As our data object is basically a JSON document so it could have nested properties.
+## where()
 
-   To target nested properties we use a single dot between the property/field name.
+To filter data we use the where() method of the QueryBuilder object.<br/>If you provide multiple conditions they are connected with an `AND`.
 
-   **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+```php
+function where(array $criteria): QueryBuilder;
+```
 
-2. # $condition
+### Parameters
 
-   To apply the comparison filters we use this argument.
+1. # $criteria
+One or multiple where conditions
+  * [$fieldName, $condition, $value]
+  * [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
+    * # $fieldName
 
-   Allowed conditional operators are:
+      The field name argument is the property that we want to check in our data object.
 
-    - `=` Match equal against data.
-    - `!=` Match not equal against data.
-    - `>` Match greater than against data.
-    - `>=` Match greater equal against data.
-    - `<` Match less than against data.
-    - `<=` Match less equal against data.
-    - `like` Match using wildcards. \
-      Supported wildcards:
-        - `%` Represents zero or more characters \
-          Example: bl% finds bl, black, blue, and blob
-        - `_` Represents a single character \
-          Example: h_t finds hot, hat, and hit
-        - `[]` Represents any single character within the brackets \
-          Example: h[oa]t finds hot and hat, but not hit
-        - `^` Represents any character not in the brackets \
-          Example: h[^oa]t finds hit, but not hot and hat
-        - `-` Represents a range of characters \
-          Example: c[a-b]t finds cat and cbt
+      As our data object is basically a JSON document so it could have nested properties.
 
-3. # $value
-   Data to be used as against the property value of the JSON documents.
+      To target nested properties we use a single dot between the property/field name.
+
+      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+
+    * # $condition
+
+      To apply the comparison filters we use this argument.
+
+      Allowed conditional operators are:
+
+        - `=` Match equal against data.
+        - `!=` Match not equal against data.
+        - `>` Match greater than against data.
+        - `>=` Match greater equal against data.
+        - `<` Match less than against data.
+        - `<=` Match less equal against data.
+        - `like` Match using wildcards. \
+          Supported wildcards:
+            - `%` Represents zero or more characters \
+              Example: bl% finds bl, black, blue, and blob
+            - `_` Represents a single character \
+              Example: h_t finds hot, hat, and hit
+            - `[]` Represents any single character within the brackets \
+              Example: h[oa]t finds hot and hat, but not hit
+            - `^` Represents any character not in the brackets \
+              Example: h[^oa]t finds hit, but not hot and hat
+            - `-` Represents a range of characters \
+              Example: c[a-b]t finds cat and cbt
+
+    * # $value
+      Data to be used as against the property value of the JSON documents.
 
 ### Example of using where() to filter data
 
 To only get the user whose country is equal to "England" we would query like this:
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
+// inline
+$users = $usersStore
+  ->createQueryBuilder()
   ->where( "name", "=", "Joshua Edwards" )
   ->getQuery()
   ->fetch();
+
+// creating the QueryBuilder
+$usersQueryBuilder = $usersStore->createQueryBuilder();
+
+// preparing the query with the QueryBuilder
+$usersQueryBuilder->where( "name", "=", "Joshua Edwards" );
+
+// executing the query
+$users = $usersQueryBuilder->getQuery()->fetch();
 ```
 
-You can use multiple `where()` conditions.
+You can also use multiple `where` conditions.
 
-Example:
+Retrieve all users that have products.totalSaved > 10 AND products.totalBought > 20.
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->where( "products.totalSaved", ">", 10 )
-  ->where( "products.totalBought", ">", 20 )
+// inline & using where method multiple times
+$users = $usersQueryBuilder
+  ->where( ["products.totalSaved", ">", 10] )
+  ->where( ["products.totalBought", ">", 20] )
   ->getQuery()
   ->fetch();
+
+// inline & using where method once
+$users = $usersQueryBuilder
+  ->where([ ["products.totalSaved", ">", 10], ["products.totalBought", ">", 20] ])
+  ->getQuery()
+  ->fetch();
+
+// retrieve QueryBuilder
+$usersQueryBuilder = $usersStore->createQueryBuilder()
+
+// prepare query
+$usersQueryBuilder->where([ ["products.totalSaved", ">", 10], ["products.totalBought", ">", 20] ]);
+
+// execute query
+$users = $usersQueryBuilder->getQuery()->fetch();
+
 ```
 
 ### orWhere()
