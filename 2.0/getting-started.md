@@ -16,48 +16,48 @@ Here "posts" is a store and "documents" are a collection of JSON files that cont
 
 ## 📌 Important Note
 
-> With this release of version 2.0 we have updated the internal implementation. We introduced new API and the old SleekDB object has to retire! Although, we are providing downwards compatibility in this version but it will be removed in version 3.0<br />This documentation contains examples using the new API.
+> With the release of version 2.0 we have updated the internal implementation.<br/>We introduce a new API and the old SleekDB object has to retire!<br/>Although, we are providing downwards compatibility in this version, but will remove the old SleekDB object with version 3.0.<br />This documentation focus on the new API.
 
 ## Query Life Cycle
 
-Each query will follow the below steps or execution life cycle,
+Each query will follow the below steps or execution life cycle.
 
 1. # Store
 
-   While initializing the SleekDB object, at first it will initialize the store, using the `Store` class. It will handle new or existing store, validate the configurations and as well as the store permission.
+   The `Store` class is the first, and in most cases also the only part you need to come in contact with.
 
 2. # Query Builder
 
-   The `QueryBuilder` class handles the creation of a query. The query will be prepared using the `getQuery` method.
+   The `QueryBuilder` class is used to prepare a query. To execute it `getQuery` method can be used.
 
 3. # Query
 
-   At this step the `Query` class will be instantiated and would get the query from the `QueryBuilder` in order to process the query. Then it will be passed to the caching layer if it's a fetch or select query.
+   At this step the `Query` class contains all information needed to execute the query.
 
 4. # Cache
 
-   The `Cache` class handles everything regarding caching. It will decide when to cache or not to cache against a query, deleting cache etc and then return the data.
+   The `Cache` class handles everything regarding caching. It will decide when to cache or not to cache.
 
-## Insert and Fetch Data
+## First Example - Insert and Fetch Data
 
-1. To began with, it requires a valid "path" where it can write data or find existing data. Absolute or relative path both are supported.
+1. To begin with, we need a valid "path" where we want to store our data.<br/>Both absolute and relative paths are supported.
 
    ```php
    $dataDir = __DIR__ . "/mydb";
    ```
 
-2. Once we have the data directory, now we can initialize the store. If the store doesn't exist then it will be created automatically.
+2. Once we have the data directory, we can initialize the store.<br/>If the store doesn't exist it will be created automatically.
 
    ```php
    $newsStore = new \SleekDB\Store("news", $dataDir);
    ```
 
-   Optionally you can pass a configuration array in the third parameter. Read more about <a class="gotoblock" href="/#/configurations">configurations</a>.
+   Optionally you can pass a configuration array as a third parameter. Read more about <a class="gotoblock" href="/#/configurations">configurations</a>.
 
-3. Inserting your first news article using the `insert` method. The insertable item should be an array that will be written in a JSON file.
+3. Inserting your first news article using the `insert` method. The article has to be an array.
 
    ```php
-   $newsInsertable = [
+   $article = [
      "title" => "Google Pixel XL",
      "about" => "Google announced a new Pixel!",
      "author" => [
@@ -65,15 +65,15 @@ Each query will follow the below steps or execution life cycle,
        "name" : "Foo Bar"
      ]
    ];
-   $results = $newsStore->insert($newsInsertable);
+   $results = $newsStore->insert($article);
    ```
 
-   The results variable would contain all the inserted data and with the `_id` property which will be unique and added automatically.
+   The results variable will contain all the inserted data and with their `_id` property which will be unique and added automatically.
 
-4. To find all news we will use the `fetch` method,
+4. To find all news articles we will use the `findAll` method.
 
    ```php
-   $allNews = $newsStore->createQueryBuilder()->getQuery()->fetch();
+   $allNews = $newsStore->findAll();
 
    print_r($allNews);
    ```

@@ -8,307 +8,119 @@
 
 # Fetch Data
 
-To get data from the store we use the `fetch()`, `first()` or `exists()` method from the instantiated object of the `Query` class.
+To get data from the store SleekDB provides some simple yet powerful methods.
 
-Example:
+> ℹ️ If you need to make more complex queries look into <a class="gotoblock" href="#/query-builder">QueryBuilder</a>.
 
+## Summary
+
+* findAll
+* findById
+* findBy
+* findOneBy
+
+## Get all documents
 ```php
-$userStore
-  ->getQueryBuilder()
-  ->getQuery()
-  ->fetch();
+function findAll(): array
 ```
 
-The above command would query into the "users" store to fetch all the data available in the store.
+### Return value
+Returns either an `array containing all documents` of that store or an `empty array` if there are no documents.
 
-## Apply Filters and Conditions
-
-### where()
-
-To filter data we use the where() method of the QueryBuilder object.
-
-The where() method takes three arguments, those are:
-
+### Example
 ```php
-where( string $fieldName, string $condition, mixed $value ): QueryBuilder;
+$allNews = $newsStore->findAll();
 ```
 
-1. # $fieldName
-
-   The field name argument is the property that we want to check in our data object.
-
-   As our data object is basically a JSON document so it could have nested properties.
-
-   To target nested properties we use a single dot between the property/field name.
-
-   **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
-
-2. # $condition
-
-   To apply the comparison filters we use this argument.
-
-   Allowed conditional operators are:
-
-   - `=` Match equal against data.
-   - `!=` Match not equal against data.
-   - `>` Match greater than against data.
-   - `>=` Match greater equal against data.
-   - `<` Match less than against data.
-   - `<=` Match less equal against data.
-   - `like` Match using wildcards. \
-     Supported wildcards:
-     - `%` Represents zero or more characters \
-       Example: bl% finds bl, black, blue, and blob
-     - `_` Represents a single character \
-       Example: h_t finds hot, hat, and hit
-     - `[]` Represents any single character within the brackets \
-       Example: h[oa]t finds hot and hat, but not hit
-     - `^` Represents any character not in the brackets \
-       Example: h[^oa]t finds hit, but not hot and hat
-     - `-` Represents a range of characters \
-       Example: c[a-b]t finds cat and cbt
-
-3. # $value
-   Data to be used as against the property value of the JSON documents.
-
-### Example of using where() to filter data
-
-To only get the user whose country is equal to "England" we would query like this:
-
-```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->where( "name", "=", "Joshua Edwards" )
-  ->getQuery()
-  ->fetch();
+#### Example result
+```
+[["_id" => 12, "title" => "We love SleekDB"], ["_id" => 14, "title" => "NoSQL with just PHP"], ...]
 ```
 
-You can use multiple `where()` conditions.
+<br/>
 
-Example:
+## Get a single document with its _id
+
+With this method SleekDB doesn't traverse through all files. Instead, it accesses the file directly, what makes this method especially fast.
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->where( "products.totalSaved", ">", 10 )
-  ->where( "products.totalBought", ">", 20 )
-  ->getQuery()
-  ->fetch();
+function findById(int $id): array|null
 ```
 
-### orWhere()
+### Parameters
 
-`orWhere(...)` works as the OR condition of SQL. SleekDB supports multiple orWhere as object chain.
+  1. # $id: int 
+  The _id of a document located in the store.
 
-The `orWhere()` method takes three arguments same as `where()` condition, those are:
+### Return value
+Returns `one document` or `null` if document could not be found.
 
+### Example
 ```php
-orWhere( string $fieldName, string $condition, mixed $value ): QueryBuilder;
+$news = $newsStore->findById(12);
 ```
 
-You can also specify one or multiple where conditions within one or-where condition as an array. These where conditions then are connected with an "and".
-
-```php
-orWhere( [[string $fieldName, string $condition, mixed $value], [string $fieldName, string $condition, $value], ...] );
+#### Example result
+```
+["_id" => 12, "title" => "SleekDB is the Best", ...]
 ```
 
-**Example:**
+<br/>
+
+## Get one or multiple documents
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->where( "products.totalSaved", ">", 10 )
-  ->where( "products.totalBought", ">", 20 )
-  ->getQuery()
-  ->fetch();
+function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array|null
+```
+### Parameters
+  1. # $criteria: array
+  One or multiple where clauses.
+    * [["city", "=", "london"], ["age", ">", 18]]<br/>
+      `WHERE city = "london" AND age > 18`
+  2. # $orderBy: array
+  Order in which the results will be sort.
+    * ["name" => "asc"]
+  3. # $limit: int
+  Limit the result to a specific amount.
+  4. # $offset: offset
+  Skip a specific amount of documents.
+
+### Return value
+Returns found `documents in an array` or `null` if nothing is found.
+
+### Example
+```php
+$news = $newsStore->findBy(["author", "=", "John"], ["title" => "asc"], 10, 20);
+// First 20 documents skipped, limited to 10 and ascending sort by title where author is John.
+```
+#### Example result
+```
+[ ["_id" => 12, "title" => "Best Database"], ["_id" => 4, "title" => "Why SleekDB"], ...]
 ```
 
-**Multiple orWhere clause example:**
+<br/>
+
+## Get one document.
+```php
+function findOneBy(array $criteria): array|null
+```
+### Parameters
+1. # $criteria: array
+One or multiple where clauses.
+    * [["city", "=", "london"], ["age", ">", 18]]<br/>`WHERE city = "london" AND age > 18`
+
+### Return value
+Returns `one document` or `null` if nothing is found.
+
+### Examples
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->where( "products.totalSaved", ">", 10 )
-  ->where( "products.totalBought", ">", 20 )
-  ->orWhere( "products.shipped", "=", 1 )
-  ->getQuery()
-  ->fetch();
+$news = $newsStore->findOneBy(["author", "=", "Mike"]);
+// Returns one news article of the author called Mike
 ```
 
-**One orWhere with multiple where clause, which are connected with and example:**
+#### Example result
 
-```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->where( "products.totalSaved", ">", 10 )
-  ->orWhere(
-    [
-      [ "products.totalBought", ">", 20 ],
-      [ "products.shipped", "=", 1 ]
-    ]
-  )
-  ->getQuery()
-  ->fetch();
 ```
-
-### in()
-
-in(...) works as the IN clause of SQL. SleekDB supports multiple IN as object chain for different fields.
-
-The in() method takes two arguments, those are:
-
-```php
-in(string $fieldName, array $values = []): QueryBuilder;
-```
-
-1. # $fieldName
-
-   The field name argument is the property that we want to check in our data object.
-
-   As our data object is basically a JSON document so it could have nested properties.
-
-2. # $values
-
-   This argument takes an array to match documents within its items.
-
-**Example:**
-
-```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->in("country", ["BD", "CA", "SE", "NA"])
-  ->getQuery()
-  ->fetch();
-```
-
-### notIn()
-
-notIn(...) works as the opposite of in() method.
-
-It will filter out all documents that has particular data items from the given array.
-SleekDB supports multiple notIn as object chain for different fields.
-
-The notIn() method takes two arguments as in() method, those are:
-
-```php
-notIn(string $fieldName, array $values = []): QueryBuilder;
-```
-
-**Example:**
-
-```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->notIn("country", ["IN", "KE", "OP"])
-  ->getQuery()
-  ->fetch();
-```
-
-**Multiple notIn clause example with nested properties:**
-
-```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->notIn("country", ["IN", "KE", "OP"])
-  ->notIn("products.totalSaved", [100, 150, 200])
-  ->getQuery()
-  ->fetch();
-```
-
-### select()
-
-With select(...) you can specify specific fields that to output, like after the SELECT keyword in SQL. SleekDB supports multiple `select()` as object chain for multiple fields.
-
-The select() method takes one argument:
-
-```php
-select(array $fieldNames): QueryBuilder
-```
-
-**Example:**
-
-```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->select(['name'])
-  ->getQuery()
-  ->fetch();
-// output: [["_id": 1, "name": "Max"], ["_id": 2, "name": "Hasan"]]
-```
-
-### except()
-
-`except(...)` works as the opposite of `select()` method. Use it when you don't want a property with the data returned. For example, if you don't want the password field in your returned data set then use this method.
-
-The except() method takes one argument:
-
-```php
-except(array $fieldNames): QueryBuilder
-```
-
-**Example:**
-
-```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->except(["_id", "name"])
-  ->getQuery()
-  ->fetch();
-// output: [["age": 28], ["age": 18]]
-```
-
-### first()
-
-Returns the very first document discovered. It is more efficient than `fetch` but one caveat is that the `orderBy` will not work when you this method to get the very first item.
-
-```php
-first(): QueryBuilder
-```
-
-**Example:**
-
-```php
-$users = $userStore
-  ->getQueryBuilder()
-  ->where("email", "=", "foo@bar.com")
-  ->getQuery()
-  ->first();
-```
-
-### exists()
-
-Returns boolean `true` if data exists, `false` if data does not exists. It is more efficient than using `fetch` to check if some data exists or not. For example, you may use exists method to check if a username or email address is unique or not.
-
-```php
-exists(): QueryBuilder
-```
-
-**Example:**
-
-```php
-$usernameUniqueness = $userStore
-  ->getQueryBuilder()
-  ->where("username", "=", "foobar")
-  ->getQuery()
-  ->exists();
-```
-
-### distinct()
-
-The distinct method is used to retrieve unique values from the store. It will remove all the duplicate documents while fetching data from a store.
-
-The distinct() method takes only one argument,
-
-```php
-distinct( array|string $fields ): QueryBuilder;
-```
-
-**Example:**
-
-```php
-$distinctUsers = $userStore
-  ->getQueryBuilder()
-  ->distinct(["name"])
-  ->getQuery()
-  ->fetch()
+["_id" => 18, "title" => "SleekDB is super fast", "author" => "Mike"]
 ```

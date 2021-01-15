@@ -12,38 +12,38 @@ Store is a simple directory where SleekDB will write all your data in JSON docum
 
 ## Your first store
 
-To start working with a store, at first we need to create an object.
+To start working with a store we need to create an object.
 
-Later, we can use that object to work with data for that store.
+Later, we can use that object to work with the data in that store.
 
 - Creating a store
 
   ```php
-  use SleekDB\SleekDB;
-  $newsStore = new \SleekDB\Store('news', $dataDir);
+  use SleekDB\Store;
+  $newsStore = new Store('news', $dataDir);
   ```
 
-- Creating an additional store; assuming we are working on a community site where need to have a users store too.
+- Creating an additional store; assuming we are working on a community platform, where need a users store too.
 
   ```php
-  $userStore = new \SleekDB\Store('users', $dataDir);
+  $userStore = new Store('users', $dataDir);
   ```
 
 - Another store to keep all the posts shared by the user.
 
   ```php
-  $postStore = new \SleekDB\Store('posts', $dataDir);
+  $postStore = new Store('posts', $dataDir);
   ```
 
 - Creating a new user
   ```php
   $userStore->insert([
-    'name' => 'Mike Doe',
-    'email' => 'miked@example.com',
-    'avatar' => [
-      'sm' => "/img-sm.jpg",
-      'lg' => "/img-lg.jpg"
-    ]
+      'name' => 'Mike Doe',
+      'email' => 'miked@example.com',
+      'avatar' => [
+        'sm' => "/img-sm.jpg",
+        'lg' => "/img-lg.jpg"
+      ]
   ]);
   ```
 

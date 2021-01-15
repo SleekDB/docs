@@ -16,11 +16,11 @@
 
 - # Schema free data storage
 
-  SleekDB does not require any schema so you can insert any types of data you want.
+  SleekDB does not require any schema, so you can insert any types of data you want.
 
 - # Query on nested properties
 
-  As it supports schema free data so you can filter and use conditions on nested properties of the JSON documents!
+  As it supports schema free data, so you can filter and use conditions on nested properties of the JSON documents!
 
   If you write this where clause:
 
@@ -32,17 +32,17 @@
 
   ```json
   {
-    "post": {
-      "author": {
-        "role": "admin"
+      "post": {
+        "author": {
+          "role": "admin"
+        }
       }
-    }
   }
   ```
 
-- # Dependency free, only need PHP to run
+- # Dependency free, only needs PHP to run
 
-  Supports PHP 7+. Requires no third-party plugins or softwares.
+  Supports PHP 7+. Requires no third-party plugins or software.
 
 - # Default caching layer
 
@@ -65,10 +65,11 @@
   - distinct
   - exists
   - first
+  - ...
 
 - # Process data on demand
 
-  SleekDB does not require any background process or network protocol in order to process data when you use it in a PHP project. All data for a query will be fetched runtime within the same PHP process.
+  SleekDB does not require any background process or network protocol in order to process data when you use it in a PHP project. All data for a query will be fetched at runtime within the same PHP process.
 
 - # Runs everywhere
 
@@ -84,7 +85,7 @@
 
 - # Actively maintained
 
-  SleekDB is created by <a rel="noopener nofollow" href="https://twitter.com/rakibtg" target="_blank">@rakibtg</a> who is using it in various types of applications which are in production right now. Our another contributor and active maintainer is <a rel="noopener nofollow" href="https://www.goodsoft.de" target="_blank">Timu</a> who is making SleekDB much better in terms of code quality and new features.
+  SleekDB is created by <a rel="noopener nofollow" href="https://twitter.com/rakibtg" target="_blank">@rakibtg</a> who is using it in various types of applications which are in production right now. Our other contributor and active maintainer is <a rel="noopener nofollow" href="https://www.goodsoft.de" target="_blank">Timu</a> who is making SleekDB much better in terms of code quality and new features.
 
 - # Support
 
