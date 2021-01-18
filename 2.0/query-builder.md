@@ -14,6 +14,22 @@ The QueryBuilder is used to **prepare more complex queries**, **`not to execute 
 $usersQueryBuilder = $usersStore->createQueryBuilder();
 ```
 
+## Summary
+
+- getQuery
+- where
+- orWhere
+- in
+- notIn
+- select
+- distinct
+- skip
+- limit
+- orderBy
+- search
+- Cache management
+- join
+
 ## getQuery()
 
 With the `getQuery` method of the QueryBuilder class you can **`retrieve the Query object to execute the query`**.
@@ -373,45 +389,6 @@ $users = $userStore
 // output: [["age": 28], ["age": 18]]
 ```
 
----
-
-## first()
-
-Returns the very first document discovered. It is more efficient than `fetch` but one caveat is that the `orderBy` will not work when using this method to get the very first item.
-
-```php
-function first(): QueryBuilder
-```
-
-### Examples
-
-```php
-$users = $usersQuerybuilder
-  ->where("email", "=", "foo@bar.com")
-  ->getQuery()
-  ->first();
-```
-
-## exists()
-
-Returns boolean `true` if data exists, `false` if data does not exists. It is more efficient than using `fetch` to check if some data exists or not. For example, you may use exists method to check if a username or email address is unique or not.
-
-```php
-exists(): QueryBuilder
-```
-
-**Example:**
-
-```php
-$usernameUniqueness = $userStore
-  ->getQueryBuilder()
-  ->where("username", "=", "foobar")
-  ->getQuery()
-  ->exists();
-```
-
----
-
 ## distinct()
 
 The distinct method is used to retrieve unique values from the store. It will remove all the duplicate documents while fetching data from a store.
@@ -546,7 +523,23 @@ Find all articles that include the word "SleekDB" in their description.
 
 ```php
 $articles = $articlesQueryBuilder
-  ->search(["content"], "SleekDB")
+  ->search("content", "SleekDB")
   ->getQuery()
   ->fetch();
+```
+
+## Cache management
+
+The QueryBuilder provides the `useCache`, `disableCache` and `regenerateCache` methods to manage caching on a query by query base.
+
+Please visit the <a class="gotoblock" href="#/cache-management">Cache Management</a> page for more details.
+
+## join()
+
+This method is used to join two or multiple stores together.
+
+For more details please visit the <a class="gotoblock" href="#/join-stores">Join Stores</a> page.
+
+```php
+function join(callable $joinedStore, string $dataPropertyName): QueryBuilder
 ```
