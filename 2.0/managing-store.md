@@ -51,33 +51,10 @@ In the above example we have created a new user to understand the purpose of a s
 
 ## Deleting A Store
 
-To delete a store use the `delete()` method. It deletes a store and wipes all the data and cache it contains.
+To delete a store use the `deleteStore()` method. It deletes a store and wipes all the data and cache it contains.
 
 Example:
 
 ```php
-$userStore->delete();
-```
-
-## Keeping Store Conditions
-
-When you use the `getQueryBuilder()` method you get a new QueryBuilder object, that means your conditions are reset to default.
-
-But if you want to keep the condition parameters for query and perform additional operations then you may want to keep the QueryBuilder and/or Query object.
-
-Here is an example showing how you may fetch data and then update on the discovered documents without running an additional query:
-
-```php
-$userQuery = $userStore->getQueryBuilder()
-  ->where('products.totalBought', '>', 0)
-  ->where('products.totalSaved', '>', 0)
-  ->getQuery();
-
-// Fetch data.
-$userQuery->fetch();
-
-// Update matched documents.
-$userQuery->update([
-  'someRandomData' => '123',
-]);
+$userStore->deleteStore();
 ```

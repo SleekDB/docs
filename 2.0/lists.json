@@ -3,8 +3,8 @@
   "features.md",
   "installation.md",
   "getting-started.md",
-  "configurations.md",
   "managing-store.md",
+  "configurations.md",
   "insert-data.md",
   "fetch-data.md",
   "edit-data.md",
@@ -19,6 +19,7 @@
   "join-stores.md",
   "query.md",
   "cache.md",
+  "advanced.md",
   "contact.md",
   "reference.md",
   "versions.md"

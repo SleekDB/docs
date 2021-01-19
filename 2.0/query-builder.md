@@ -11,7 +11,7 @@
 The QueryBuilder is used to **prepare more complex queries**, **`not to execute the query!`**. You can create a QueryBuilder with the `createQueryBuilder()` method of the `Store` class.
 
 ```php
-$usersQueryBuilder = $usersStore->createQueryBuilder();
+$userQueryBuilder = $userStore->createQueryBuilder();
 ```
 
 ## Summary
@@ -110,20 +110,20 @@ To only get the user whose country is equal to "England" we would query like thi
 
 ```php
 // inline
-$users = $usersStore
+$users = $userStore
   ->createQueryBuilder()
   ->where( "name", "=", "Joshua Edwards" )
   ->getQuery()
   ->fetch();
 
 // creating the QueryBuilder
-$usersQueryBuilder = $usersStore->createQueryBuilder();
+$userQueryBuilder = $userStore->createQueryBuilder();
 
 // preparing the query with the QueryBuilder
-$usersQueryBuilder->where( "name", "=", "Joshua Edwards" );
+$userQueryBuilder->where( "name", "=", "Joshua Edwards" );
 
 // executing the query
-$users = $usersQueryBuilder->getQuery()->fetch();
+$users = $userQueryBuilder->getQuery()->fetch();
 ```
 
 You can also use multiple `where` conditions.
@@ -132,14 +132,14 @@ Retrieve all users that have `products.totalSaved > 10 AND products.totalBought 
 
 ```php
 // inline & using where method multiple times
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->where( ["products.totalSaved", ">", 10] )
   ->where( ["products.totalBought", ">", 20] )
   ->getQuery()
   ->fetch();
 
 // inline & using where method once
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->where(
     [ 
       ["products.totalSaved", ">", 10], 
@@ -150,10 +150,10 @@ $users = $usersQueryBuilder
   ->fetch();
 
 // retrieve QueryBuilder
-$usersQueryBuilder = $usersStore->createQueryBuilder()
+$userQueryBuilder = $userStore->createQueryBuilder()
 
 // prepare query
-$usersQueryBuilder->where(
+$userQueryBuilder->where(
   [ 
     ["products.totalSaved", ">", 10], 
     ["products.totalBought", ">", 20] 
@@ -161,7 +161,7 @@ $usersQueryBuilder->where(
 );
 
 // execute query
-$users = $usersQueryBuilder->getQuery()->fetch();
+$users = $userQueryBuilder->getQuery()->fetch();
 
 ```
 
@@ -222,7 +222,7 @@ One or multiple where conditions
 Retrieve all users that have `(products.totalSaved > 10 AND products.totalBought > 20) OR products.shipped = 1`
 
 ```php
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->where( 
     [ 
       ["products.totalSaved", ">", 10], 
@@ -237,7 +237,7 @@ $users = $usersQueryBuilder
 Retrieve all users that have `products.totalSaved > 10 OR (products.totalBought > 20 AND products.shipped = 1) OR totalBought = 0`
 
 ```php
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->where( ["products.totalSaved", ">", 10] )
   ->orWhere(
     [
@@ -275,7 +275,7 @@ in(string $fieldName, array $values = []): QueryBuilder
 Retrieve all users that are from the country BD, CA, SE or NA.
 
 ```php
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->in("country", ["BD", "CA", "SE", "NA"])
   ->getQuery()
   ->fetch();
@@ -284,7 +284,7 @@ $users = $usersQueryBuilder
 Retrieve all users that are from country BD, CA, SE, NA and are at the age of 18, 20, 23 or 30.
 
 ```php
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->in("country", ["BD", "CA", "SE", "NA"])
   ->in("age", [18, 20, 23, 30])
   ->getQuery()
@@ -321,8 +321,7 @@ function notIn(string $fieldName, array $values = []): QueryBuilder
 Retrieve all users that are not from the coutry IN, KE or OP.
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
+$users = $userQueryBuilder
   ->notIn("country", ["IN", "KE", "OP"])
   ->getQuery()
   ->fetch();
@@ -331,8 +330,7 @@ $users = $userStore
 Retrieve all users that are not from the country IN, KE or OP and do not have products.totalSaved 100, 150 or 200.
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
+$users = $userQueryBuilder
   ->notIn("country", ["IN", "KE", "OP"])
   ->notIn("products.totalSaved", [100, 150, 200])
   ->getQuery()
@@ -357,8 +355,7 @@ function select(array $fieldNames): QueryBuilder
 Retrieve just the name of all users.
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
+$users = $userQueryBuilder
   ->select(['name'])
   ->getQuery()
   ->fetch();
@@ -381,8 +378,7 @@ function except(array $fieldNames): QueryBuilder
 Retrieve all information of an user except its _id and name.
 
 ```php
-$users = $userStore
-  ->getQueryBuilder()
+$users = $userQueryBuilder
   ->except(["_id", "name"])
   ->getQuery()
   ->fetch();
@@ -408,13 +404,13 @@ Retrieve all users, but just the first user if there is another one with the sam
 
 ```php
 // providing a string
-$distinctUsers = $usersQueryBuilder
+$distinctUsers = $userQueryBuilder
   ->distinct("name")
   ->getQuery()
   ->fetch();
 
 // providing an array
-$distinctUsers = $usersQueryBuilder
+$distinctUsers = $userQueryBuilder
   ->distinct(["name"])
   ->getQuery()
   ->fetch();
@@ -438,7 +434,7 @@ function skip(int $skip = 0): QueryBuilder
 Retrieve all users except the first 10 found.
 
 ```php
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->skip(10)
   ->getQuery()
   ->fetch();
@@ -462,7 +458,7 @@ function limit($limit = 0): QueryBuilder
 Retrieve just the first ten users.
 
 ```php
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->limit(10)
   ->getQuery()
   ->fetch();
@@ -490,7 +486,7 @@ function orderBy( array $criteria): QueryBuilder
 Retrieve all users sorted by their name.
 
 ```php
-$users = $usersQueryBuilder
+$users = $userQueryBuilder
   ->orderBy(["name" => "asc"])
   ->getQuery()
   ->fetch();
@@ -522,7 +518,7 @@ function search(string|array $fields, string $keyword): QueryBuilder
 Find all articles that include the word "SleekDB" in their description.
 
 ```php
-$articles = $articlesQueryBuilder
+$articles = $articleQueryBuilder
   ->search("content", "SleekDB")
   ->getQuery()
   ->fetch();
