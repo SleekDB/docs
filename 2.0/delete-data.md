@@ -41,7 +41,7 @@ This method returns based on the given return option either `boolean`, `int` or 
 Lets delete all user whose name is "Joshua Edwards"
 
 ```php
-$usersStore->deleteBy(['name', '=', 'Joshua Edwards']);
+$userStore->deleteBy(['name', '=', 'Joshua Edwards']);
 // Returns true
 ```
 
@@ -49,7 +49,7 @@ Lets delete all user whose name is "Joshua Edwards" and retrieve deleted documen
 
 ```php
 use SleekDB/Query;
-$usersStore->deleteBy(['name', '=', 'Joshua Edwards'], Query::DELETE_RETURN_RESULTS);
+$userStore->deleteBy(['name', '=', 'Joshua Edwards'], Query::DELETE_RETURN_RESULTS);
 ```
 
 #### Example result
@@ -78,6 +78,6 @@ Returns `true` if document does not exist or deletion was successful or `false` 
 ### Example
 
 ```php
-$usersStore->deleteById(12);
+$userStore->deleteById(12);
 // Returns true
 ```

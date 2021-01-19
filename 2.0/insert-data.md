@@ -10,6 +10,11 @@
 
 To insert data first you make a PHP array, and simply insert that array into a store.
 
+## Summary
+
+- insert
+- insertMany
+
 ## Insert a single document
 
 ```php
@@ -42,7 +47,7 @@ $user = [
     ]
 ];
 // Insert the data.
-$user = $usersStore->insert($user);
+$user = $userStore->insert($user);
 ```
 
 <br/>
@@ -99,5 +104,5 @@ $users = [
     ]
 ];
 // Insert all data.
-$users = $usersStore->insertMany($users);
+$users = $userStore->insertMany($users);
 ```

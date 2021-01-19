@@ -10,107 +10,137 @@
 
 With SleekDB it is easy to join multiple stores. You can add more than one `join` as well as nested `join` methods are also supported!
 
-Example:
+### Quick Example
+
+Query into the "users" store to fetch all users.
+Each user also will get an additional property called "comments", that contains all comments of the user.
 
 ```php
-$userStore
-  ->getQueryBuilder()
-  ->join(function($user) use ($commentsStore) {
-    return $commentsStore
-      ->getQueryBuilder()
-      ->where("user", "=", $user["_id"]);
+$usersWithComments = $userStore
+  ->createQueryBuilder()
+  ->join(function($user) use ($commentStore) {
+    return $commentStore->findBy(["user", "=", $user["_id"]]);
   }, "comments")
   ->getQuery()
   ->fetch();
 ```
+#### Result
+```
+[
+  [
+    "_id" => 1, 
+    "name" => "John", 
+    "comments" => [
+      [
+        "_id" => 1,
+        "articleId" => 3
+        "content" => "I love SleekDB"
+      ],
+      ...
+    ]
+  ],
+  ...
+]
+```
 
-The above command would query into the "users" store to fetch all the data.
-Each user also has an additional property called "comments", that contains all comments of the user.
-
-## Apply Filters and Conditions
-
-### join()
+## join()
 
 To join stores we use the join() method of the QueryBuilder object.
 
 The join() method takes two arguments, those are:
 
 ```php
-join(callable $joinFunction, string $dataPropertyName): QueryBuilder
+function join(callable $joinFunction, string $dataPropertyName): QueryBuilder
 ```
 
-1. # $joinFunction
+### Parameters
 
-   This function has to return the result of an executed sub query or prepares a sub query for the join and returns it as a QueryBuilder object.
+1. # $joinFunction: callable
 
-2. # $dataPropertyName
+   This function has to return the `result of an executed sub query` or prepares a sub query for the join and returns it as a `QueryBuilder object`.
+
+2. # $dataPropertyName: string
 
    Name of the new property added to each document.
 
-### Example of using join() to join stores
+### Examples
 
 To get the users with their comments we would join like this:
 
 ```php
-$userStore = new \SleekDB\Store("users", $dataDir);
-$commentsStore = new \SleekDB\Store("comments", $dataDir);
+use SleekDB\Store;
 
+$userStore = new Store("users", $dataDir);
+$commentStore = new Store("comments", $dataDir);
+
+$users = $usersStore
+  ->createQueryBuilder()
+  ->join(function($user) use ($commentStore){
+    // returns result
+    return $commentStore->findBy([ "userId", "=", $user["_id"] ]);
+  }, "comments")
+  ->getQuery()
+  ->fetch();
+
+// or
 $users = $userStore
-  ->getQueryBuilder()
-  ->join(function($user) use ($commentsStore){
-    return $commentsStore
-      ->getQueryBuilder()
-      ->where("userId", "=", $user["_id"]);
+  ->createQueryBuilder()
+  ->join(function($user) use ($commentStore){
+    // returns Querybuilder
+    return $commentStore
+      ->createQueryBuilder()
+      ->where([ "userId", "=", $user["_id"] ]);
   }, "comments")
   ->getQuery()
   ->fetch();
 ```
 
-You can use multiple `join()`.
-
-Example:
+Use multiple `join()`.<br/>
+Retrieve all users with their comments and their articles.
 
 ```php
-$userStore = new \SleekDB\Store("users", $dataDir);
-$commentsStore = new \SleekDB\Store("comments", $dataDir);
-$articlesStore = new \SleekDB\Store("articles", $dataDir);
+use SleekDB\Store;
+
+$userStore = new Store("users", $dataDir);
+$commentStore = new Store("comments", $dataDir);
+$articleStore = new Store("articles", $dataDir);
 
 $users = $userStore
-  ->getQueryBuilder()
-  ->join(function($user) use ($commentsStore) {
-    return $commentsStore
-      ->getQueryBuilder()
-      ->where("userId", "=", $user["_id"]);
+  ->createQueryBuilder()
+  ->join(function($user) use ($commentStore) {
+    // returns result
+    return $commentStore->findBy([ "userId", "=", $user["_id"] ]);
   }, "comments")
   ->join(function($user) use ($articleStore) {
-    return $articleStore
-      ->getQueryBuilder()
-      ->where("author", "=", $user["_id"]);
+    // returns result
+    return $articleStore->findBy([ "author", "=", $user["_id"] ]);
   }, "articles")
   ->getQuery()
   ->fetch();
 ```
 
-You can use `join()` within a join sub query.
-
-Example:
+Use `join()` within a join sub query.<br/>
+Retrieve all users with their created articles containing the comments.
 
 ```php
-$userStore = new \SleekDB\Store("users", $dataDir);
-$commentsStore = new \SleekDB\Store("comments", $dataDir);
-$articlesStore = new \SleekDB\Store("articles", $dataDir);
+use SleekDB\Store;
+
+$userStore = new Store("users", $dataDir);
+$commentStore = new Store("comments", $dataDir);
+$articleStore = new Store("articles", $dataDir);
 
 $users = $userStore
-  ->getQueryBuilder()
-  ->join(function($user) use ($articleStore){
+  ->createQueryBuilder()
+  ->join(function($user) use ($articleStore, $commentStore){
+    // returns QueryBuilder
     return $articleStore
-      ->getQueryBuilder()
-      ->where("author", "=", $user["_id"])
-      ->join(function($article) use ($commentsStore){
-        return $commentsStore
-          ->getQueryBuilder()
-          ->where("articleId", "=", $article["_id"]);
+      ->createQueryBuilder()
+      ->where([ "author", "=", $user["_id"] ])
+      ->join(function($article) use ($commentStore){
+        // returns result
+        return $commentStore->findBy("articleId", "=", $article["_id"]);
       }, "comments");
+
   }, "articles")
   ->getQuery()
   ->fetch();

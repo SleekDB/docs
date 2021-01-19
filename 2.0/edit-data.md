@@ -10,7 +10,7 @@
 
 To edit a data object you can use the `update()` method of the `Store` class.
 
-> ℹ️ If you need to make a more complex updates look into <a class="gotoblock" href="#/query-builder">QueryBuilder</a> and <a class="gotoblock" href="#/query">Query</a>.
+> ℹ️ If you need to make more complex updates look into <a class="gotoblock" href="#/query-builder">QueryBuilder</a> and <a class="gotoblock" href="#/query">Query</a>.
 
 This method is especially fast because it uses the _id of the given document to update it directly instead of traversing through all documents.
 
@@ -45,19 +45,19 @@ $user = [
 $store->insert($user); // has _id = 1
 
 // retrieve a user
-$user = $usersStore->findById(1);
+$user = $userStore->findById(1);
 
 // update user
 $user["name"] = "Luke Bowman";
 
-$usersStore->update( $user ); // updates the user by using his _id
+$userStore->update( $user ); // updates the user by using his _id
 ```
 
 ## Update multiple users
 
 ```php
 // retrieve users
-$users = $usersStore->findBy(["name", "=", "Josh"]);
+$users = $userStore->findBy(["name", "=", "Josh"]);
 
 foreach($users as $key => $user){
     // change the properties of the users
@@ -68,5 +68,5 @@ foreach($users as $key => $user){
 }
 
 // update all users that had the name Josh
-$usersStore->update( $users );
+$userStore->update( $users );
 ```

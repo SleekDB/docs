@@ -21,11 +21,12 @@ They are store wide, which means they will be used on every query, if not change
 You can pass the configurations array as a third parameter when initializing the Store object:
 
 ```php
-$newsStore = new \SleekDB\Store("news", $dataDir, [
+$configuration = [
   "auto_cache" => true,
   "cache_lifetime" => null,
   "timeout" => 120
-]);
+];
+$newsStore = new \SleekDB\Store("news", $dataDir, $configuration);
 ```
 
 Let's get familiar with the available configuration options.
