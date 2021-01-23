@@ -12,7 +12,7 @@ We would love to see how you are using the database, if you have implemented som
 
 What changes will make you more interested.
 
-If you want to submit a bug feel free to create a new <a rel="noopener nofollow" href="https://github.com/rakibtg/SleekDB/issues" target="_blank">issue</a> or email me @ rakibtg [-at-] gmail.
+If you want to submit a bug feel free to create a new <a rel="noopener nofollow" href="https://github.com/rakibtg/SleekDB/issues" target="_blank">issue</a> or email me @ rakibtg [-at-] gmail [-dot-] com
 
 ## About
 
