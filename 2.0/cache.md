@@ -10,7 +10,9 @@
 
 With the Cache class you can control Caching in a deeper way.
 
-That said, this class is `mainly for internal use` and normally that kind of deep cache control is not needed.
+That said, this class is **`mainly for internal use`** and normally that kind of deep cache control is not needed.
+
+> ⚠️️ Be careful when using the `Cache` object.
 
 To retrieve the Cache object use the `getCache` method of the `Query` class.
 
