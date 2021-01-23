@@ -8,5 +8,5 @@
 
 # Versions
 
-- **[2.0](/versions/2.0) (Upcoming Version)**
+- **[2.0](/) (Actively Maintained Version)**
 - **[1.5.0](/versions/1.5.0/) (Bug Fixes Only)**
