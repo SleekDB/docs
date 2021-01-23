@@ -10,9 +10,9 @@
 
 ## 📢 Optimizations, new query methods and more control
 
-SleekDB 2.0 comes with so many important optimizations and other features that make it faster and more mature. This is the recommended SleekDB release version for new project, and if you are using an older version consider upgrading as fast as possible.
+SleekDB 2.0 comes with so many important optimizations and other features that make it faster and more mature. This is the recommended SleekDB release version for new projects, and if you are using an older version consider upgrading as soon as possible.
 
-### Breaking changes from 1.5 to 2.0
+### Changes from 1.5 to 2.0
 
 - # 🔎 Improving document discovery process
 
@@ -22,7 +22,7 @@ SleekDB 2.0 comes with so many important optimizations and other features that m
 
   The support of PHP 5 is dropped to provide more modern features.
 
-- # ✨ Added new query methods
+- # ✨ New query methods
 
   - `first()`
   - `exists()`
@@ -48,14 +48,20 @@ SleekDB 2.0 comes with so many important optimizations and other features that m
 
 - # SleekDB class now deprecated
 
-  Although, we are providing downwards compatibility in this version, but will remove the old SleekDB class with version 3.0.
+  We beliefe that downwards compatibility is very important.
+  
+  That's why we always try our best to keep SleekDB as downwards compatible as possible and avoid breaking changes.
+  
+  Unfortunatelly we had to refactor and rewrite the whole SleekDB project to make it future proof and keep it maintainable. As a consequence the SleekDB class is now deprecated with version 2.0 and will be removed with version 3.0.
 
-- # Better Caching Support
+  ### A new era for SleekDB begins!
 
-  Data caching has been improved,
+- # Better Caching Solution
 
-  - Added custom expiry of a cache file.
-  - Allows query specific caching rules.
+  Data caching has been improved significantly.
+
+  - Add custom expiry of a cache file with lifetime.
+  - Ability of query specific caching rules.
 
 ## Issues
 
