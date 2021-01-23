@@ -28,8 +28,6 @@ Find SleekDB on **<a rel="noopener nofollow" href="https://packagist.org/package
 
 ## Install Manually (without composer)
 
-> Using SleekDB without composer is **deprecated** since version 2.0 and will be removed in future releases.
-
 - <a rel="noopener nofollow" href=" https://github.com/rakibtg/SleekDB/archive/master.zip">Download</a> the latest version and extract the ZIP file inside your project directory.
 - Import the SleekDB.php file where you want to use SleekDB.
 
