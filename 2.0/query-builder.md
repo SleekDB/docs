@@ -39,18 +39,19 @@ function getQuery(): Query
 ```
 
 The most important methods of the Query class to execute a query are:
-  * # fetch()
-    Retrieve multiple documents
-  * # first()
-    Retrieve first found document
-  * # exists()
-    Check if a document for given query exist
-  * # delete()
-    Delete all documents that are found with given query
-  * # update()
-    Update all documents that are found with given query
 
-For more details on query execution please visit the <a class="gotoblock" href="#/query">Query</a> page.
+- # fetch()
+  Retrieve multiple documents
+- # first()
+  Retrieve first found document
+- # exists()
+  Check if a document for given query exist
+- # delete()
+  Delete all documents that are found with given query
+- # update()
+  Update all documents that are found with given query
+
+For more details on query execution please visit the <a class="gotoblock" href="/#/query">Query</a> page.
 
 ## where()
 
@@ -63,46 +64,48 @@ function where(array $criteria): QueryBuilder
 ### Parameters
 
 1. # $criteria
-One or multiple where conditions
-  * [$fieldName, $condition, $value]
-  * [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
-    * # $fieldName: string
+   One or multiple where conditions
 
-      The field name argument is the property that we want to check in our data object.
+- [$fieldName, $condition, $value]
+- [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
 
-      As our data object is basically a JSON document so it could have nested properties.
+  - # $fieldName: string
 
-      To target nested properties we use a single dot between the property/field name.
+    The field name argument is the property that we want to check in our data object.
 
-      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+    As our data object is basically a JSON document so it could have nested properties.
 
-    * # $condition: string
+    To target nested properties we use a single dot between the property/field name.
 
-      To apply the comparison filters we use this argument.
+    **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
 
-      Allowed conditional operators are:
+  - # $condition: string
 
-        - `=` Match equal against data.
-        - `!=` Match not equal against data.
-        - `>` Match greater than against data.
-        - `>=` Match greater equal against data.
-        - `<` Match less than against data.
-        - `<=` Match less equal against data.
-        - `like` Match using wildcards. \
-          Supported wildcards:
-            - `%` Represents zero or more characters \
-              Example: bl% finds bl, black, blue, and blob
-            - `_` Represents a single character \
-              Example: h_t finds hot, hat, and hit
-            - `[]` Represents any single character within the brackets \
-              Example: h[oa]t finds hot and hat, but not hit
-            - `^` Represents any character not in the brackets \
-              Example: h[^oa]t finds hit, but not hot and hat
-            - `-` Represents a range of characters \
-              Example: c[a-b]t finds cat and cbt
+    To apply the comparison filters we use this argument.
 
-    * # $value
-      Data that will be checked against the property value of the JSON documents.
+    Allowed conditional operators are:
+
+    - `=` Match equal against data.
+    - `!=` Match not equal against data.
+    - `>` Match greater than against data.
+    - `>=` Match greater equal against data.
+    - `<` Match less than against data.
+    - `<=` Match less equal against data.
+    - `like` Match using wildcards. \
+      Supported wildcards:
+      - `%` Represents zero or more characters \
+        Example: bl% finds bl, black, blue, and blob
+      - `_` Represents a single character \
+        Example: h_t finds hot, hat, and hit
+      - `[]` Represents any single character within the brackets \
+        Example: h[oa]t finds hot and hat, but not hit
+      - `^` Represents any character not in the brackets \
+        Example: h[^oa]t finds hit, but not hot and hat
+      - `-` Represents a range of characters \
+        Example: c[a-b]t finds cat and cbt
+
+  - # $value
+    Data that will be checked against the property value of the JSON documents.
 
 ### Examples
 
@@ -141,9 +144,9 @@ $users = $userQueryBuilder
 // inline & using where method once
 $users = $userQueryBuilder
   ->where(
-    [ 
-      ["products.totalSaved", ">", 10], 
-      ["products.totalBought", ">", 20] 
+    [
+      ["products.totalSaved", ">", 10],
+      ["products.totalBought", ">", 20]
     ]
   )
   ->getQuery()
@@ -154,9 +157,9 @@ $userQueryBuilder = $userStore->createQueryBuilder()
 
 // prepare query
 $userQueryBuilder->where(
-  [ 
-    ["products.totalSaved", ">", 10], 
-    ["products.totalBought", ">", 20] 
+  [
+    ["products.totalSaved", ">", 10],
+    ["products.totalBought", ">", 20]
   ]
 );
 
@@ -176,46 +179,48 @@ function orWhere(array $criteria): QueryBuilder
 ### Properties
 
 1. # $criteria
-One or multiple where conditions
-  * [$fieldName, $condition, $value]
-  * [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
-    * # $fieldName: string
+   One or multiple where conditions
 
-      The field name argument is the property that we want to check in our data object.
+- [$fieldName, $condition, $value]
+- [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
 
-      As our data object is basically a JSON document so it could have nested properties.
+  - # $fieldName: string
 
-      To target nested properties we use a single dot between the property/field name.
+    The field name argument is the property that we want to check in our data object.
 
-      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+    As our data object is basically a JSON document so it could have nested properties.
 
-    * # $condition: string
+    To target nested properties we use a single dot between the property/field name.
 
-      To apply the comparison filters we use this argument.
+    **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
 
-      Allowed conditional operators are:
+  - # $condition: string
 
-        - `=` Match equal against data.
-        - `!=` Match not equal against data.
-        - `>` Match greater than against data.
-        - `>=` Match greater equal against data.
-        - `<` Match less than against data.
-        - `<=` Match less equal against data.
-        - `like` Match using wildcards. \
-          Supported wildcards:
-            - `%` Represents zero or more characters \
-              Example: bl% finds bl, black, blue, and blob
-            - `_` Represents a single character \
-              Example: h_t finds hot, hat, and hit
-            - `[]` Represents any single character within the brackets \
-              Example: h[oa]t finds hot and hat, but not hit
-            - `^` Represents any character not in the brackets \
-              Example: h[^oa]t finds hit, but not hot and hat
-            - `-` Represents a range of characters \
-              Example: c[a-b]t finds cat and cbt
+    To apply the comparison filters we use this argument.
 
-    * # $value
-      Data that will be checked against the property value of the JSON documents.
+    Allowed conditional operators are:
+
+    - `=` Match equal against data.
+    - `!=` Match not equal against data.
+    - `>` Match greater than against data.
+    - `>=` Match greater equal against data.
+    - `<` Match less than against data.
+    - `<=` Match less equal against data.
+    - `like` Match using wildcards. \
+      Supported wildcards:
+      - `%` Represents zero or more characters \
+        Example: bl% finds bl, black, blue, and blob
+      - `_` Represents a single character \
+        Example: h_t finds hot, hat, and hit
+      - `[]` Represents any single character within the brackets \
+        Example: h[oa]t finds hot and hat, but not hit
+      - `^` Represents any character not in the brackets \
+        Example: h[^oa]t finds hit, but not hot and hat
+      - `-` Represents a range of characters \
+        Example: c[a-b]t finds cat and cbt
+
+  - # $value
+    Data that will be checked against the property value of the JSON documents.
 
 ### Examples
 
@@ -223,11 +228,11 @@ Retrieve all users that have `(products.totalSaved > 10 AND products.totalBought
 
 ```php
 $users = $userQueryBuilder
-  ->where( 
-    [ 
-      ["products.totalSaved", ">", 10], 
-      ["products.totalBought", ">", 20] 
-    ] 
+  ->where(
+    [
+      ["products.totalSaved", ">", 10],
+      ["products.totalBought", ">", 20]
+    ]
   )
   ->orWhere( ["products.shipped", "=", 1] )
   ->getQuery()
@@ -375,7 +380,7 @@ function except(array $fieldNames): QueryBuilder
 
 ### Examples
 
-Retrieve all information of an user except its _id and name.
+Retrieve all information of an user except its \_id and name.
 
 ```php
 $users = $userQueryBuilder
@@ -475,11 +480,12 @@ function orderBy( array $criteria): QueryBuilder
 ### Parameters
 
 1. # $criteria: array
-  * [$fieldName => $order]
-    * # $fieldName: string
-      Name of the field that will be used to sort the result.
-    * # $order: string
-      Either `desc` for a descending sort or `asc` for a ascending sort.
+
+- [$fieldName => $order]
+  - # $fieldName: string
+    Name of the field that will be used to sort the result.
+  - # $order: string
+    Either `desc` for a descending sort or `asc` for a ascending sort.
 
 ### Examples
 
@@ -509,9 +515,9 @@ function search(string|array $fields, string $keyword): QueryBuilder
 ### Parameters
 
 1. # $fields: array|string
-  One or multiple fields that will be searched.
+   One or multiple fields that will be searched.
 2. $keyword: string
-  Value that will be searched by.
+   Value that will be searched by.
 
 ### Examples
 
@@ -528,13 +534,13 @@ $articles = $articleQueryBuilder
 
 The QueryBuilder provides the `useCache`, `disableCache` and `regenerateCache` methods to manage caching on a query by query base.
 
-Please visit the <a class="gotoblock" href="#/cache-management">Cache Management</a> page for more details.
+Please visit the <a class="gotoblock" href="/#/cache-management">Cache Management</a> page for more details.
 
 ## join()
 
 This method is used to join two or multiple stores together.
 
-For more details please visit the <a class="gotoblock" href="#/join-stores">Join Stores</a> page.
+For more details please visit the <a class="gotoblock" href="/#/join-stores">Join Stores</a> page.
 
 ```php
 function join(callable $joinedStore, string $dataPropertyName): QueryBuilder

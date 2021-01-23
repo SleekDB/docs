@@ -10,7 +10,7 @@
 
 The `QueryBuilder` class does provide a couple of methods to `manage caching on a query by query bases`.
 
-By default caching is enabled store wide and does not need to be enabled on a query by query bases. For more information please look into the store <a class="gotoblock" href="#/configurations">configurations</a>.
+By default caching is enabled store wide and does not need to be enabled on a query by query bases. For more information please look into the store <a class="gotoblock" href="/#/configurations">configurations</a>.
 
 Create a QueryBuilder:
 
@@ -35,11 +35,12 @@ function useCache(int $lifetime = null): QueryBuilder
 ### Parameters
 
 1. # $lifetime: int|null
-  The lifetime of the cache.
-  * `null` (Default)<br/>
-    Cache will not have a lifetime and will be regenerated on every update, delete and insert.
-  * `int`<br/>
-    Cache lifetime in seconds. `0` means infinite lifetime.
+   The lifetime of the cache.
+
+- `null` (Default)<br/>
+  Cache will not have a lifetime and will be regenerated on every update, delete and insert.
+- `int`<br/>
+  Cache lifetime in seconds. `0` means infinite lifetime.
 
 ### Examples
 
@@ -104,7 +105,7 @@ $users = $userQueryBuilder
 ## disableCache()
 
 Disable the build in caching solution on a query by query bases.<br/>
-By default caching is enabled store wide. If you want to disable caching store instead of disabling it on a query by query bases visit the store <a class="gotoblock" href="#/configurations">configurations</a> page.
+By default caching is enabled store wide. If you want to disable caching store instead of disabling it on a query by query bases visit the store <a class="gotoblock" href="/#/configurations">configurations</a> page.
 
 ```php
 function disableCache(): QueryBuilder

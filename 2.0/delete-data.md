@@ -10,11 +10,12 @@
 
 To delete documents you can use the `deleteBy()` and `deleteById()` methods of the `Store` class.
 
-> ℹ️ If you need to make a more complex delete look into <a class="gotoblock" href="#/query-builder">QueryBuilder</a> and <a class="gotoblock" href="#/query">Query</a>.
+> ℹ️ If you need to make a more complex delete look into <a class="gotoblock" href="/#/query-builder">QueryBuilder</a> and <a class="gotoblock" href="#/query">Query</a>.
 
 ## Summary
-  * deleteBy
-  * deleteById
+
+- deleteBy
+- deleteById
 
 ## Delete one or multiple documents
 
@@ -24,16 +25,22 @@ function deleteBy(array $criteria, int $returnOption = Query::DELETE_RETURN_BOOL
 
 ### Parameters
 
-  1. # $criteria: array
-  One or multiple where conditions
+1. # $criteria: array
+   One or multiple where conditions
+
+
     * [["name", "=", "John"], ["age", ">", 18]]<br/>`WHERE name = "John" AND age > 18`
-  2. # $returnOption: int
-  Different return options provided with constants of the `Query` class
+
+2. # $returnOption: int
+   Different return options provided with constants of the `Query` class
+
+
     * `Query::DELETE_RETURN_BOOL` (Default)<br/>Return true or false
     * `Query::DELETE_RETURN_RESULTS`<br/>Retrieve deleted files as an array
     * `Query::DELETE_RETURN_COUNT`<br/>Returns the amount of deleted documents
 
 ### Return value
+
 This method returns based on the given return option either `boolean`, `int` or `array`.
 
 ### Examples
@@ -53,15 +60,16 @@ $userStore->deleteBy(['name', '=', 'Joshua Edwards'], Query::DELETE_RETURN_RESUL
 ```
 
 #### Example result
+
 ```
 [ ["_id" => 12, "name" => "Joshua Edwards"], ["_id" => 14, "name" => "Joshua Edwards"], ... ]
 ```
 
 <br/>
 
-## Delete one document with its _id
+## Delete one document with its \_id
 
-This method is especially fast because SleekDB uses the _id to directly delete the document and does not traverse through all files.
+This method is especially fast because SleekDB uses the \_id to directly delete the document and does not traverse through all files.
 
 ```php
 function deleteById(int $id): bool
@@ -69,10 +77,11 @@ function deleteById(int $id): bool
 
 ### Parameters
 
-  1. # $id: int
-  The _id of a document located in the store.
+1. # $id: int
+   The \_id of a document located in the store.
 
 ### Return value
+
 Returns `true` if document does not exist or deletion was successful or `false` on failure.
 
 ### Example

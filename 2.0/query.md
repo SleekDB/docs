@@ -10,7 +10,7 @@
 
 With the Query object you can execute a query.
 
-To get the Query object use the `getQuery` method of the <a class="gotoblock" href="#/query-builder">QueryBuilder</a> class:
+To get the Query object use the `getQuery` method of the <a class="gotoblock" href="/#/query-builder">QueryBuilder</a> class:
 
 ```php
 $userQuery = $userQueryBuilder->getQuery();
@@ -74,6 +74,7 @@ function first(): array
 ```
 
 ### Return value
+
 Returns the very first document discovered or an empty array if nothing found.
 
 ### Examples
@@ -97,13 +98,14 @@ $user = $userQueryBuilder
 
 ## exists()
 
- It is more efficient than using `fetch` to check if some data exists or not. For example, you may use exists method to check if a username or email address already exists or not.
+It is more efficient than using `fetch` to check if some data exists or not. For example, you may use exists method to check if a username or email address already exists or not.
 
 ```php
 function exists(): bool
 ```
 
 ### Return value
+
 Returns `true` if a document exists and `false` if no document found.
 
 ### Example
@@ -114,7 +116,6 @@ $userNameExists = $userQueryBuilder
   ->getQuery()
   ->exists();
 ```
-
 
 ## update()
 
@@ -127,7 +128,7 @@ function update(array $updatable): bool
 ### Parameters
 
 1. # $updatable: array
-  An array containing the properties to update.
+   An array containing the properties to update.
 
 ### Return value
 
@@ -156,10 +157,10 @@ function delete(int $returnOption = Query::DELETE_RETURN_BOOL)
 ### Parameters
 
 1. # $returnOption: int
-  Different return options provided with constants of the `Query` class
-    * `Query::DELETE_RETURN_BOOL` (Default)<br/>Return true or false
-    * `Query::DELETE_RETURN_RESULTS`<br/>Retrieve deleted files as an array
-    * `Query::DELETE_RETURN_COUNT`<br/>Returns the amount of deleted documents
+   Different return options provided with constants of the `Query` class
+   - `Query::DELETE_RETURN_BOOL` (Default)<br/>Return true or false
+   - `Query::DELETE_RETURN_RESULTS`<br/>Retrieve deleted files as an array
+   - `Query::DELETE_RETURN_COUNT`<br/>Returns the amount of deleted documents
 
 ### Return value
 
@@ -203,4 +204,3 @@ $result = $userStore
   ->delete(Query::DELETE_RETURN_RESULT);
 // output: [ ["_id" => 1, "name" => "Max"], ["_id" => 4, "name" => "John"], ... ]
 ```
-

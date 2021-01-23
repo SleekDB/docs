@@ -75,4 +75,4 @@ SleekDB 1.5.0 comes with few important optimizations and with other features tha
   ]);
   ```
 
-Github release note: <a href="https://github.com/rakibtg/SleekDB/releases/tag/1.5.0" target="_blank">https://github.com/rakibtg/SleekDB/releases/tag/1.5.0</a>
+Github release note: <a rel="noopener nofollow" href="https://github.com/rakibtg/SleekDB/releases/tag/1.5.0" target="_blank">https://github.com/rakibtg/SleekDB/releases/tag/1.5.0</a>

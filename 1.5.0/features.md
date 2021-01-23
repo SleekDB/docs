@@ -61,6 +61,6 @@
 
 - # Actively maintained
 
-  SleekDB is actively maintained by <a href="https://twitter.com/rakibtg" target="_blank">@rakibtg</a>. For support and other requirements <a class="gotoblock" href="#contact">contact</a>.
+  SleekDB is actively maintained by <a rel="noopener nofollow" href="https://twitter.com/rakibtg" target="_blank">@rakibtg</a>. For support and other requirements <a class="gotoblock" href="#contact">contact</a>.
 
 - Easily import/export or backup data.

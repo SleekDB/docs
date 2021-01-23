@@ -8,7 +8,7 @@
 
 # Search Data
 
-We can search data using the search() method. It utilizes the <a href="http://php.net/manual/en/function.similar-text.php" target="_blank">similar_text()</a> function and works better on medium length string.
+We can search data using the search() method. It utilizes the <a rel="noopener nofollow" href="http://php.net/manual/en/function.similar-text.php" target="_blank">similar_text()</a> function and works better on medium length string.
 
 The search method takes two argument,
 

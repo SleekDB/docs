@@ -32,11 +32,11 @@
 
   ```json
   {
-      "post": {
-        "author": {
-          "role": "admin"
-        }
+    "post": {
+      "author": {
+        "role": "admin"
       }
+    }
   }
   ```
 
@@ -89,4 +89,4 @@
 
 - # Support
 
-  For support and other requirements <a class="gotoblock" href="#/contact">contact</a>.
+  For support and other requirements <a class="gotoblock" href="/#/contact">contact</a>.
