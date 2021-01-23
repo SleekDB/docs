@@ -12,15 +12,15 @@
   "skip-limit.md",
   "sort-data.md",
   "search-data.md",
-  "contributing.md",
-  "release-notes.md",
-  "query-builder.md",
-  "cache-management.md",
-  "join-stores.md",
   "query.md",
+  "query-builder.md",
+  "join-stores.md",
   "cache.md",
+  "cache-management.md",
   "advanced.md",
   "reference.md",
+  "contributing.md",
   "contact.md",
-  "versions.md"
+  "versions.md",
+  "release-notes.md"
 ]
