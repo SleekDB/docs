@@ -22,6 +22,7 @@ $userQueryBuilder = $userStore->createQueryBuilder();
 - in
 - notIn
 - select
+- except
 - distinct
 - skip
 - limit
