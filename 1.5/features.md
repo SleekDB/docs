@@ -8,8 +8,6 @@
 
 # Features
 
-## Installing SleekDB
-
 - # Light-weight, faster
 
   Stores data in plain-text utilizing JSON format, no binary conversion needed to store or fetch the data.
