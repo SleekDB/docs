@@ -46,26 +46,48 @@
 
 - # Default caching layer
 
-  SleekDB will serve data from cache by default and regenerate cache automatically! Query results will be cached and later reused from a single file instead of travarsing all the available files.
+  SleekDB will serve data from cache by default and regenerate cache automatically! Query results will be cached and later reused from a single file instead of traversing all the available files.
 
 - # Rich Conditions and Filters
 
   Use multiple conditional comparisons, text search, sorting on multiple properties and nested properties. Some useful methods are:
 
-  - where
-  - join
-  - in
-  - notIn
-  - like
-  - orWhere
-  - sort
-  - skip
-  - limit
-  - search
-  - distinct
-  - exists
-  - first
-  - ...
+  <table>
+    <tbody>
+      <tr>
+        <td valign="top">
+          <ul>
+            <li>where</li>
+            <li>orWhere</li>
+            <li>select</li>
+            <li>except</li>
+            <li>in</li>
+            <li>notIn</li>
+          </ul>
+        </td>
+        <td valign="top">
+          <ul>
+            <li>join</li>
+            <li>like</li>
+            <li>sort</li>
+            <li>skip</li>
+            <li>orderBy</li>
+            <li>update</li>
+          </ul>
+        </td>
+        <td valign="top">
+          <ul>
+            <li>limit</li>
+            <li>search</li>
+            <li>distinct</li>
+            <li>exists</li>
+            <li>first</li>
+            <li>delete</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 - # Process data on demand
 
