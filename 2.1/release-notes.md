@@ -15,7 +15,7 @@ SleekDB 2.0 comes with so many important optimizations and other features that m
 ### Changes from 2.0 to 2.1
 
 - # ⚙️ New Configuration
-With the new `primary_key` configuration you can now change the _id key name to everything you want.
+With the new `primary_key` configuration you can now change the _id key name to everything you want. To see how to use the new configuration option visit the <a class="gotoblock" href="/#/configurations">Configurations</a> page.
 
 ### Changes from 1.5 to 2.0
 
