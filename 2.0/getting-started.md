@@ -61,8 +61,8 @@ Each query will follow the below steps or execution life cycle.
      "title" => "Google Pixel XL",
      "about" => "Google announced a new Pixel!",
      "author" => [
-       "avatar": "profile-12.jpg",
-       "name" : "Foo Bar"
+       "avatar" => "profile-12.jpg",
+       "name" => "Foo Bar"
      ]
    ];
    $results = $newsStore->insert($article);

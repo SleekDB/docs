@@ -116,7 +116,7 @@ To only get the user whose country is equal to "England" we would query like thi
 // inline
 $users = $userStore
   ->createQueryBuilder()
-  ->where( "name", "=", "Joshua Edwards" )
+  ->where( [ "name", "=", "Joshua Edwards" ] )
   ->getQuery()
   ->fetch();
 
@@ -124,7 +124,7 @@ $users = $userStore
 $userQueryBuilder = $userStore->createQueryBuilder();
 
 // preparing the query with the QueryBuilder
-$userQueryBuilder->where( "name", "=", "Joshua Edwards" );
+$userQueryBuilder->where( [ "name", "=", "Joshua Edwards" ] );
 
 // executing the query
 $users = $userQueryBuilder->getQuery()->fetch();
