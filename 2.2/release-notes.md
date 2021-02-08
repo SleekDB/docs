@@ -12,6 +12,16 @@
 
 SleekDB 2.0 comes with so many important optimizations and other features that make it faster and more mature. This is the recommended SleekDB release version for new projects, and if you are using an older version consider upgrading as soon as possible.
 
+### Changes from 2.1 to 2.2
+
+- # 🗃 Order by multiple fields
+Now the `orderBy()` method of the QueryBuilder accepts multiple fields to sort the result.<br/>
+Look at the updated orderBy section of the <a class="gotoblock" href="#/query-builder">QueryBuilder documentation</a> to learn more.
+
+- # 🔍 New nestedWhere() method
+With the new added `nestedWhere()` method you can now use much complexer where statements to filter data.<br/>
+Look at the new nestedWhere section of the <a class="gotoblock" href="#/query-builder">QueryBuilder documentation</a> to learn more.
+
 ### Changes from 2.0 to 2.1
 
 - # ⚙️ New Configuration

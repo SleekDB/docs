@@ -19,6 +19,7 @@ $userQueryBuilder = $userStore->createQueryBuilder();
 - getQuery
 - where
 - orWhere
+- nestedWhere
 - in
 - notIn
 - select
@@ -72,41 +73,41 @@ function where(array $criteria): QueryBuilder
 
   - # $fieldName: string
 
-    The field name argument is the property that we want to check in our data object.
+      The field name argument is the property that we want to check in our data object.
 
-    As our data object is basically a JSON document so it could have nested properties.
+      As our data object is basically a JSON document so it could have nested properties.
 
-    To target nested properties we use a single dot between the property/field name.
+      To target nested properties we use a single dot between the property/field name.
 
-    **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
 
   - # $condition: string
 
-    To apply the comparison filters we use this argument.
+      To apply the comparison filters we use this argument.
 
-    Allowed conditional operators are:
+      Allowed conditional operators are:
 
-    - `=` Match equal against data.
-    - `!=` Match not equal against data.
-    - `>` Match greater than against data.
-    - `>=` Match greater equal against data.
-    - `<` Match less than against data.
-    - `<=` Match less equal against data.
-    - `like` Match using wildcards. \
-      Supported wildcards:
-      - `%` Represents zero or more characters \
-        Example: bl% finds bl, black, blue, and blob
-      - `_` Represents a single character \
-        Example: h_t finds hot, hat, and hit
-      - `[]` Represents any single character within the brackets \
-        Example: h[oa]t finds hot and hat, but not hit
-      - `^` Represents any character not in the brackets \
-        Example: h[^oa]t finds hit, but not hot and hat
-      - `-` Represents a range of characters \
-        Example: c[a-b]t finds cat and cbt
+      - `=` Match equal against data.
+      - `!=` Match not equal against data.
+      - `>` Match greater than against data.
+      - `>=` Match greater equal against data.
+      - `<` Match less than against data.
+      - `<=` Match less equal against data.
+      - `like` Match using wildcards. \
+        Supported wildcards:
+        - `%` Represents zero or more characters \
+          Example: bl% finds bl, black, blue, and blob
+        - `_` Represents a single character \
+          Example: h_t finds hot, hat, and hit
+        - `[]` Represents any single character within the brackets \
+          Example: h[oa]t finds hot and hat, but not hit
+        - `^` Represents any character not in the brackets \
+          Example: h[^oa]t finds hit, but not hot and hat
+        - `-` Represents a range of characters \
+          Example: c[a-b]t finds cat and cbt
 
   - # $value
-    Data that will be checked against the property value of the JSON documents.
+      Data that will be checked against the property value of the JSON documents.
 
 ### Examples
 
@@ -187,41 +188,41 @@ function orWhere(array $criteria): QueryBuilder
 
   - # $fieldName: string
 
-    The field name argument is the property that we want to check in our data object.
+      The field name argument is the property that we want to check in our data object.
 
-    As our data object is basically a JSON document so it could have nested properties.
+      As our data object is basically a JSON document so it could have nested properties.
 
-    To target nested properties we use a single dot between the property/field name.
+      To target nested properties we use a single dot between the property/field name.
 
-    **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
 
   - # $condition: string
 
-    To apply the comparison filters we use this argument.
+      To apply the comparison filters we use this argument.
 
-    Allowed conditional operators are:
+      Allowed conditional operators are:
 
-    - `=` Match equal against data.
-    - `!=` Match not equal against data.
-    - `>` Match greater than against data.
-    - `>=` Match greater equal against data.
-    - `<` Match less than against data.
-    - `<=` Match less equal against data.
-    - `like` Match using wildcards. \
-      Supported wildcards:
-      - `%` Represents zero or more characters \
-        Example: bl% finds bl, black, blue, and blob
-      - `_` Represents a single character \
-        Example: h_t finds hot, hat, and hit
-      - `[]` Represents any single character within the brackets \
-        Example: h[oa]t finds hot and hat, but not hit
-      - `^` Represents any character not in the brackets \
-        Example: h[^oa]t finds hit, but not hot and hat
-      - `-` Represents a range of characters \
-        Example: c[a-b]t finds cat and cbt
+      - `=` Match equal against data.
+      - `!=` Match not equal against data.
+      - `>` Match greater than against data.
+      - `>=` Match greater equal against data.
+      - `<` Match less than against data.
+      - `<=` Match less equal against data.
+      - `like` Match using wildcards. \
+        Supported wildcards:
+        - `%` Represents zero or more characters \
+          Example: bl% finds bl, black, blue, and blob
+        - `_` Represents a single character \
+          Example: h_t finds hot, hat, and hit
+        - `[]` Represents any single character within the brackets \
+          Example: h[oa]t finds hot and hat, but not hit
+        - `^` Represents any character not in the brackets \
+          Example: h[^oa]t finds hit, but not hot and hat
+        - `-` Represents a range of characters \
+          Example: c[a-b]t finds cat and cbt
 
   - # $value
-    Data that will be checked against the property value of the JSON documents.
+      Data that will be checked against the property value of the JSON documents.
 
 ### Examples
 
@@ -252,6 +253,156 @@ $users = $userQueryBuilder
     ]
   )
   ->orWhere( ["products.totalBought", "=", 0] )
+  ->getQuery()
+  ->fetch();
+```
+
+## nestedWhere()
+
+With the `nestedWhere(...)` method you are able to make complex nested where statements.
+
+```php
+function nestedWhere(array $conditions): QueryBuilder
+```
+
+### Conditions array structure
+```php
+[
+  "OUTERMOST_OPERATION" => [
+    // conditions
+  ]
+];
+```
+
+### Properties
+
+1. # $conditions
+   Multiple where conditions
+
+- Small Example:<br/>
+  [ "OUTERMOST_OPERATION" => [ [$fieldName, $condition, $value], "OPERATION", [$fieldName, $condition, $value] ] ]
+
+
+  - # $fieldName: string
+
+      The field name argument is the property that we want to check in our data object.
+
+      As our data object is basically a JSON document so it could have nested properties.
+
+      To target nested properties we use a single dot between the property/field name.
+
+      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+
+  - # $condition: string
+
+      To apply the comparison filters we use this argument.
+
+      Allowed conditional operators are:
+
+      - `=` Match equal against data.
+      - `!=` Match not equal against data.
+      - `>` Match greater than against data.
+      - `>=` Match greater equal against data.
+      - `<` Match less than against data.
+      - `<=` Match less equal against data.
+      - `like` Match using wildcards. \
+        Supported wildcards:
+        - `%` Represents zero or more characters \
+          Example: bl% finds bl, black, blue, and blob
+        - `_` Represents a single character \
+          Example: h_t finds hot, hat, and hit
+        - `[]` Represents any single character within the brackets \
+          Example: h[oa]t finds hot and hat, but not hit
+        - `^` Represents any character not in the brackets \
+          Example: h[^oa]t finds hit, but not hot and hat
+        - `-` Represents a range of characters \
+          Example: c[a-b]t finds cat and cbt
+
+  - # $value
+    Data that will be checked against the property value of the JSON documents.
+  - # OUTERMOST_OPERATION: string
+    Can be set to `AND` or `OR`.<br/>
+    It is **optional** and will **default** to an `AND` operation.<br/>
+    The outermost operation is optional and does specify how the given conditions are connected with other conditions, like the ones that are specified using the `where`, `orWhere`, in or `notIn` methods.
+  - # OPERATION: string
+    Can be set to `AND` or `OR`.<br/>
+    The operation is used to connect multiple conditions.
+
+    
+
+### Examples
+
+Retrieve all users whos name start with "a" or "b", that have products.totalSaved > 10 and products totalBought > 10 and are between 16 and 20 or 24 and 28 years old.
+
+```sql
+WHERE 
+  (products.totalSaved > 10 AND products.totalBought > 20) 
+  AND // <- Outermost Operation
+  ( 
+    (name like 'a%' OR name like 'b%') 
+    AND 
+    (
+      (age >= 16 AND age < 20) 
+      OR 
+      (age >= 24 AND age < 28)) 
+    )
+```
+
+```php
+$users = $userQueryBuilder
+  ->where(
+    [
+      ["products.totalSaved", ">", 10],
+      ["products.totalBought", ">", 20]
+    ]
+  )
+  ->nestedWhere(
+    [
+      "AND" => [ // <- Outermost operation
+        [
+          [ "name", "like", "a%" ], "OR", [ "name", "like", "b%" ]
+        ],
+        "AND",
+        [
+          [
+            [ "age", ">=", 16 ], "AND", [ "age", "<", 20 ]
+          ],
+          "OR",
+          [
+            [ "age", ">=", 24 ], "AND", [ "age", "<", 28 ]
+          ]
+        ]
+      ]
+    ]
+  )
+  ->getQuery()
+  ->fetch();
+```
+
+Retrieve all users that have the status "premium", live in "london" and are between the age of 16 and 20 or older than 30.
+
+```php
+$users = $userQueryBuilder
+  ->where(
+    [
+      ["status", "=", "premium"]
+    ]
+  )
+  ->nestedWhere(
+    [
+      [ // <- Outermost operation is optional (Default: "AND")
+        [ "city", "=", "london" ]
+        "AND",
+        [
+          [
+            [ "age", ">=", 16 ], "AND", [ "age", "<", 20 ]
+          ],
+          "OR",
+          [ "age", ">", 30 ]
+        ]
+      ]
+    ]
+  )
   ->getQuery()
   ->fetch();
 ```
@@ -472,7 +623,7 @@ $users = $userQueryBuilder
 
 ## orderBy()
 
-Works as the ORDER BY clause of SQL. With this method you can sort the result. At the moment the result can just be sorted by one field.
+Works as the ORDER BY clause of SQL. With this method you can sort the result. You can use this method to sort the result by one or multiple fields.
 
 ```php
 function orderBy( array $criteria): QueryBuilder
@@ -482,7 +633,7 @@ function orderBy( array $criteria): QueryBuilder
 
 1. # $criteria: array
 
-- [$fieldName => $order]
+- [ $fieldName => $order [, ...] ]
   - # $fieldName: string
     Name of the field that will be used to sort the result.
   - # $order: string
@@ -503,6 +654,26 @@ $users = $userQueryBuilder
 
 ```
 [["_id" => 13, "name" => "Anton"], ["_id" => 2, "name" => "Berta"], ...]
+```
+
+Retrieve all users sorted by their name and age.
+
+```php
+$users = $userQueryBuilder
+  ->orderBy(["name" => "asc", "age" => "asc"])
+  ->getQuery()
+  ->fetch();
+```
+
+#### Result
+
+```
+[
+  ["_id" => 13, "name" => "Anton", "age" => 20],
+  ["_id" => 4, "name" => "Aragon", "age" => 16], 
+  ["_id" => 2, "name" => "Aragon", "age" => 17], 
+  ...
+]
 ```
 
 ## search()
