@@ -12,11 +12,18 @@
 
 SleekDB 2.0 comes with so many important optimizations and other features that make it faster and more mature. This is the recommended SleekDB release version for new projects, and if you are using an older version consider upgrading as soon as possible.
 
+### Changes from 2.3 to 2.4
+
+- # 🚨 Deprecated in() & notIn() methods
+They will be removed with the next major update.<br/>
+Please **use new conditions `"in"` and `"not in"` instead**.<br/>
+Available with the `findBy()`, `findOneBy`, `deleteBy()`, `where()` and `orWhere()` methods since version 2.3.
+
 ### Changes from 2.2 to 2.3
 
 - # 🚨 Deprecated nestedWhere() method
-We are sorry to deprecate the `nestedWhere()` method so short after it's release.
-It will be removed with the next major update.
+We are sorry to deprecate the `nestedWhere()` method so short after it's release.<br/>
+It will be removed with the next major update.<br/>
 Please use `where()` and `orWhere()` instead.
 
 - # 🌟 Nested where statements everywhere!
