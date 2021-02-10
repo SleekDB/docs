@@ -140,6 +140,12 @@ Add or-where conditions to filter data.
 function orWhere($conditions): QueryBuilder
 ```
 
+Add nested where conditions to filter data.<br/>
+🚨 Deprecated since version 2.3, use `where` and `orWhere` instead
+```php
+function nestedWhere($conditions): QueryBuilder
+```
+
 Add "in" condition to filter data.
 ```php
 function in(string $fieldName, array $values = []): QueryBuilder
@@ -172,7 +178,7 @@ function search(string|array $field, string $keyword): QueryBuilder
 
 Join current store with another one. Can be used multiple times to join multiple stores.
 ```php
-function join(callable $joinFunction, string $dataPropertyName): QueryBuilder
+function join(Closure $joinFunction, string $dataPropertyName): QueryBuilder
 ```
 
 Return distinct values.
