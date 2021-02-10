@@ -813,5 +813,5 @@ This method is used to join two or multiple stores together.
 For more details please visit the <a class="gotoblock" href="/#/join-stores">Join Stores</a> page.
 
 ```php
-function join(callable $joinedStore, string $dataPropertyName): QueryBuilder
+function join(Closure $joinedStore, string $dataPropertyName): QueryBuilder
 ```
