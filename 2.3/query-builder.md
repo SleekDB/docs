@@ -94,7 +94,8 @@ function where(array $criteria): QueryBuilder
       - `>=` Match greater equal against data.
       - `<` Match less than against data.
       - `<=` Match less equal against data.
-      - `like` Match using wildcards.<br/>
+      - `like` Match using wildcards.
+      - `not like` Match using wildcards. **Negation** of result.<br/>
         Supported wildcards:
           - `%` Represents zero or more characters<br/>
             Example: bl% finds bl, black, blue, and blob
@@ -106,6 +107,9 @@ function where(array $criteria): QueryBuilder
             Example: h[^oa]t finds hit, but not hot and hat
           - `-` Represents a range of characters<br/>
             Example: c[a-b]t finds cat and cbt
+      - `in` $value has to be an `array`. Check if data is in given list. 
+      - `not in` $value has to be an `array`. Check if data is **not** in given list. 
+
 
   - # $value
       Data that will be checked against the property value of the JSON documents.
@@ -251,7 +255,8 @@ function orWhere(array $criteria): QueryBuilder
       - `>=` Match greater equal against data.
       - `<` Match less than against data.
       - `<=` Match less equal against data.
-      - `like` Match using wildcards.<br/>
+      - `like` Match using wildcards.
+      - `not like` Match using wildcards. **Negation** of result.<br/>
         Supported wildcards:
           - `%` Represents zero or more characters<br/>
             Example: bl% finds bl, black, blue, and blob
@@ -263,6 +268,8 @@ function orWhere(array $criteria): QueryBuilder
             Example: h[^oa]t finds hit, but not hot and hat
           - `-` Represents a range of characters<br/>
             Example: c[a-b]t finds cat and cbt
+      - `in` $value has to be an `array`. Check if data is in given list. 
+      - `not in` $value has to be an `array`. Check if data is **not** in given list. 
 
   - # $value
       Data that will be checked against the property value of the JSON documents.
@@ -393,7 +400,8 @@ function nestedWhere(array $conditions): QueryBuilder
       - `>=` Match greater equal against data.
       - `<` Match less than against data.
       - `<=` Match less equal against data.
-      - `like` Match using wildcards.<br/>
+      - `like` Match using wildcards.
+      - `not like` Match using wildcards. **Negation** of result.<br/>
         Supported wildcards:
           - `%` Represents zero or more characters<br/>
             Example: bl% finds bl, black, blue, and blob
@@ -405,6 +413,8 @@ function nestedWhere(array $conditions): QueryBuilder
             Example: h[^oa]t finds hit, but not hot and hat
           - `-` Represents a range of characters<br/>
             Example: c[a-b]t finds cat and cbt
+      - `in` $value has to be an `array`. Check if data is in given list. 
+      - `not in` $value has to be an `array`. Check if data is **not** in given list. 
 
   - # $value
     Data that will be checked against the property value of the JSON documents.

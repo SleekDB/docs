@@ -19,9 +19,17 @@ We are sorry to deprecate the `nestedWhere()` method so short after it's release
 It will be removed with the next major update.<br/>
 Please use `where()` and `orWhere()` instead.
 
-- # ✨ where() and orWhere() methods improved
+- # 🌟 where() and orWhere() methods improved
 The `where()` and `orWhere()` methods now can handle nested statements!<br/>
 Please check the <a class="gotoblock" href="#/query-builder">QueryBuilder documentation</a> for more details.
+
+- # ✨ New conditions
+  - `not like`
+  - `in`
+  - `not in`
+
+  These new conditions can now be used with the `where()` and `orWhere()` methods!<br/>
+  Please check the <a class="gotoblock" href="#/query-builder">QueryBuilder documentation</a> for more details.
 
 
 ### Changes from 2.1 to 2.2
