@@ -15,22 +15,94 @@ SleekDB 2.0 comes with so many important optimizations and other features that m
 ### Changes from 2.2 to 2.3
 
 - # 🚨 Deprecated nestedWhere() method
-We are sorry to deprecate the `nestedWhere()` method so short after it's release.<br/>
-It will be removed with the next major update.<br/>
+We are sorry to deprecate the `nestedWhere()` method so short after it's release.
+It will be removed with the next major update.
 Please use `where()` and `orWhere()` instead.
 
-- # 🌟 where() and orWhere() methods improved
-The `where()` and `orWhere()` methods now can handle nested statements!<br/>
-Please check the <a class="gotoblock" href="#/query-builder">QueryBuilder documentation</a> for more details.
+- # 🌟 Nested where statements everywhere!
+The `findBy()`, `findOneBy`, `deleteBy()`, `where()` and `orWhere()` methods now can handle nested statements!
+
+  <table>
+    <tr>
+      <td>
+        <ul>
+          <li><code>findBy()</code></li>
+          <li><code>findOneBy()</code></li>
+        </ul>
+      </td>
+      <td>
+        <a href="#/fetch-data">Fetch Data documentation</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <ul>
+          <li><code>deleteBy()</code></li>
+        </ul>
+      </td>
+      <td>
+        <a href="#/delete-data">Delete Data documentation</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <ul>
+          <li><code>where()</code></li>
+          <li><code>orWhere()</code></li>
+        </ul>
+      </td>
+      <td>
+        <a href="#/query-builder">QueryBuilder documentation</a>
+      </td>
+    </tr>
+  </table>
 
 - # ✨ New conditions
+
   - `not like`
   - `in`
   - `not in`
 
-  These new conditions can now be used with the `where()` and `orWhere()` methods!<br/>
-  Please check the <a class="gotoblock" href="#/query-builder">QueryBuilder documentation</a> for more details.
+  These new conditions can now be used with the `findBy()`, `findOneBy()`, `deleteBy()`, `where()` and `orWhere()` methods!
 
+    <table>
+      <tr>
+        <td>
+          <ul>
+            <li><code>findBy()</code></li>
+            <li><code>findOneBy()</code></li>
+          </ul>
+        </td>
+        <td>
+          <a href="#/fetch-data">Fetch Data documentation</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <ul>
+            <li><code>deleteBy()</code></li>
+          </ul>
+        </td>
+        <td>
+          <a href="#/delete-data">Delete Data documentation</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <ul>
+            <li><code>where()</code></li>
+            <li><code>orWhere()</code></li>
+          </ul>
+        </td>
+        <td>
+          <a href="#/query-builder">QueryBuilder documentation</a>
+        </td>
+      </tr>
+    </table>
+
+- # 💡 Logical connection
+All condition methods are now logically connected and the order when using them is now important.<br/>
+See <a rel="noopener nofollow" href="https://github.com/rakibtg/SleekDB/issues/114" target="_blank">#114</a> for more details.
 
 ### Changes from 2.1 to 2.2
 

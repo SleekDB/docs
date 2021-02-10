@@ -77,7 +77,7 @@ function first(): array
 
 Returns the very first document discovered or an empty array if nothing found.
 
-### Examples
+### Example
 
 ```php
 $user = $userQueryBuilder
@@ -166,7 +166,7 @@ function delete(int $returnOption = Query::DELETE_RETURN_BOOL)
 
 This method returns based on the given return option either `boolean`, `int` or `array`.
 
-### Example
+### Example 1
 
 Delete all users that are not active.
 
@@ -178,6 +178,8 @@ $result = $userStore
   ->delete();
 // output: true
 ```
+
+### Example 2
 
 Delete all users that are not active and retrieve the amount of deleted users.
 
@@ -191,6 +193,8 @@ $result = $userStore
   ->delete(Query::DELETE_RETURN_COUNT);
 // output: 14
 ```
+
+### Example 3
 
 Delete all users that are not active and retrieve the deleted users.
 
