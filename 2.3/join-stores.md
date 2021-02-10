@@ -63,7 +63,7 @@ function join(Closure $joinFunction, string $dataPropertyName): QueryBuilder
 
    Name of the new property added to each document.
 
-### Examples
+### Example 1
 
 To get the users with their comments we would join like this:
 
@@ -95,6 +95,8 @@ $users = $userStore
   ->fetch();
 ```
 
+### Example 2
+
 Use multiple `join()`.<br/>
 Retrieve all users with their comments and their articles.
 
@@ -118,6 +120,8 @@ $users = $userStore
   ->getQuery()
   ->fetch();
 ```
+
+### Example 3
 
 Use `join()` within a join sub query.<br/>
 Retrieve all users with their created articles containing the comments.

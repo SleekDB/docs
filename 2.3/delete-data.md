@@ -25,11 +25,59 @@ function deleteBy(array $criteria, int $returnOption = Query::DELETE_RETURN_BOOL
 
 ### Parameters
 
-1. # $criteria: array
-   One or multiple where conditions
+1. # $criteria
+   One or multiple where conditions.<br/>
+   The criteria can be nested as much as needed.
 
+- [$fieldName, $condition, $value]
+- [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
+- [ [$fieldName, $condition, $value], OPERATION ,[$fieldName, $condition, $value], ... ]
 
-    * [["name", "=", "John"], ["age", ">", 18]]<br/>`WHERE name = "John" AND age > 18`
+  - # $fieldName: string
+
+      The field name argument is the property that we want to check in our data object.
+
+      As our data object is basically a JSON document so it could have nested properties.
+
+      To target nested properties we use a single dot between the property/field name.
+
+      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+
+  - # $condition: string
+
+      To apply the comparison filters we use this argument.
+
+      Allowed conditional operators are:
+
+      - `=` Match equal against data.
+      - `!=` Match not equal against data.
+      - `>` Match greater than against data.
+      - `>=` Match greater equal against data.
+      - `<` Match less than against data.
+      - `<=` Match less equal against data.
+      - `like` Match using wildcards.
+      - `not like` Match using wildcards. **Negation** of result.<br/>
+        Supported wildcards:
+          - `%` Represents zero or more characters<br/>
+            Example: bl% finds bl, black, blue, and blob
+          - `_` Represents a single character<br/>
+            Example: h_t finds hot, hat, and hit
+          - `[]` Represents any single character within the brackets<br/>
+            Example: h[oa]t finds hot and hat, but not hit
+          - `^` Represents any character not in the brackets<br/>
+            Example: h[^oa]t finds hit, but not hot and hat
+          - `-` Represents a range of characters<br/>
+            Example: c[a-b]t finds cat and cbt
+      - `in` $value has to be an `array`. Check if data is in given list. 
+      - `not in` $value has to be an `array`. Check if data is **not** in given list. 
+
+  - # $value
+      Data that will be checked against the property value of the JSON documents.
+
+  - # OPERATION: string
+    It is used to connect multiple conditions.<br/>
+    The operation is optional and can be set to `AND` or `OR`.<br/>
+    Default: `AND`
 
 2. # $returnOption: int
    Different return options provided with constants of the `Query` class
@@ -43,12 +91,12 @@ function deleteBy(array $criteria, int $returnOption = Query::DELETE_RETURN_BOOL
 
 This method returns based on the given return option either `boolean`, `int` or `array`.
 
-### Examples
+### Example 1
 
 Lets delete all user whose name is "Joshua Edwards"
 
 ```php
-$userStore->deleteBy(['name', '=', 'Joshua Edwards']);
+$userStore->deleteBy(["name", "=", "Joshua Edwards"]);
 // Returns true
 ```
 
@@ -56,13 +104,39 @@ Lets delete all user whose name is "Joshua Edwards" and retrieve deleted documen
 
 ```php
 use SleekDB/Query;
-$userStore->deleteBy(['name', '=', 'Joshua Edwards'], Query::DELETE_RETURN_RESULTS);
+$deletedUsers = $userStore->deleteBy(["name", "=", "Joshua Edwards"], Query::DELETE_RETURN_RESULTS);
 ```
 
 #### Example result
 
 ```
 [ ["_id" => 12, "name" => "Joshua Edwards"], ["_id" => 14, "name" => "Joshua Edwards"], ... ]
+```
+
+### Example 2
+
+Deletion with more complex where statement.
+
+```sql
+WHERE ( name = "Joshua Edwards" OR name = "Mark Schiffer" ) AND ( age > 30 OR age < 10 )
+```
+
+```php
+$userStore->deleteBy(
+    [
+      [
+        ["name", "=", "Joshua Edwards"],
+        "OR",
+        ["name", "=", "Mark Shiffer"],
+      ],
+      "AND", // <-- Optional
+      [
+        ["age", ">", 30],
+        "OR",
+        ["age", "<", 10]
+      ]
+    ]
+  );
 ```
 
 <br/>
