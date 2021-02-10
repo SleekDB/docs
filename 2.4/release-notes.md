@@ -16,8 +16,9 @@ SleekDB 2.0 comes with so many important optimizations and other features that m
 
 - # 🚨 Deprecated in() & notIn() methods
 They will be removed with the next major update.<br/>
-Please **use new conditions `"in"` and `"not in"` instead**.<br/>
-Available with the `findBy()`, `findOneBy`, `deleteBy()`, `where()` and `orWhere()` methods since version 2.3.
+Please **use the new conditions `"in"` and `"not in"` instead**.<br/>
+Available with the `findBy()`, `findOneBy`, `deleteBy()`, `where()` and `orWhere()` methods since version 2.3.<br/>
+See <a rel="noopener nofollow" href="https://github.com/rakibtg/SleekDB/issues/118" target="_blank">#118</a> for more details.
 
 ### Changes from 2.2 to 2.3
 
