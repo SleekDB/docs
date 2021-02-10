@@ -82,18 +82,65 @@ function findBy(array $criteria, array $orderBy = null, int $limit = null, int $
 
 ### Parameters
 
-1. # $criteria: array
-   One or multiple where clauses.
+1. # $criteria
+   One or multiple where conditions.<br/>
+   The criteria can be nested as much as needed.
 
+- [$fieldName, $condition, $value]
+- [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
+- [ [$fieldName, $condition, $value], OPERATION ,[$fieldName, $condition, $value], ... ]
 
-    * [["city", "=", "london"], ["age", ">", 18]]<br/>
-      `WHERE city = "london" AND age > 18`
+  - # $fieldName: string
+
+      The field name argument is the property that we want to check in our data object.
+
+      As our data object is basically a JSON document so it could have nested properties.
+
+      To target nested properties we use a single dot between the property/field name.
+
+      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+
+  - # $condition: string
+
+      To apply the comparison filters we use this argument.
+
+      Allowed conditional operators are:
+
+      - `=` Match equal against data.
+      - `!=` Match not equal against data.
+      - `>` Match greater than against data.
+      - `>=` Match greater equal against data.
+      - `<` Match less than against data.
+      - `<=` Match less equal against data.
+      - `like` Match using wildcards.
+      - `not like` Match using wildcards. **Negation** of result.<br/>
+        Supported wildcards:
+          - `%` Represents zero or more characters<br/>
+            Example: bl% finds bl, black, blue, and blob
+          - `_` Represents a single character<br/>
+            Example: h_t finds hot, hat, and hit
+          - `[]` Represents any single character within the brackets<br/>
+            Example: h[oa]t finds hot and hat, but not hit
+          - `^` Represents any character not in the brackets<br/>
+            Example: h[^oa]t finds hit, but not hot and hat
+          - `-` Represents a range of characters<br/>
+            Example: c[a-b]t finds cat and cbt
+      - `in` $value has to be an `array`. Check if data is in given list. 
+      - `not in` $value has to be an `array`. Check if data is **not** in given list. 
+
+  - # $value
+      Data that will be checked against the property value of the JSON documents.
+
+  - # OPERATION: string
+    It is used to connect multiple conditions.<br/>
+    The operation is optional and can be set to `AND` or `OR`.<br/>
+    Default: `AND`
 
 2. # $orderBy: array
-   Order in which the results will be sort.
-
+   Sort the result by one or multiple fields.
 
     * ["name" => "asc"]
+    * ["name" => "asc", "age" => "desc"]
 
 3. # $limit: int
    Limit the result to a specific amount.
@@ -104,17 +151,42 @@ function findBy(array $criteria, array $orderBy = null, int $limit = null, int $
 
 Returns found `documents in an array` or `null` if nothing is found.
 
-### Example
+### Example 1
 
 ```php
 $news = $newsStore->findBy(["author", "=", "John"], ["title" => "asc"], 10, 20);
 // First 20 documents skipped, limited to 10 and ascending sort by title where author is John.
 ```
 
-#### Example result
+#### Result
 
 ```
-[ ["_id" => 12, "title" => "Best Database"], ["_id" => 4, "title" => "Why SleekDB"], ...]
+[ ["_id" => 12, ... "title" => "Best Database"], ["_id" => 4, ... "title" => "Why SleekDB"], ...]
+```
+
+### Example 2
+
+More complex where clause.
+
+```sql
+WHERE ( author = "John" OR author = "Mark" ) AND ( topic like "School%" OR topic like "Work%" )
+```
+
+```php
+$news = $newsStore->findBy(
+      [
+         [
+            ["author", "=", "John"], "OR", ["author", "=", "Mark"],
+         ],
+         "AND", // <-- Optional
+         [
+            ["topic", "like", "School%"], "OR", ["topic", "like", "Work%"]
+         ]
+      ],
+      ["title" => "asc"],
+      10,
+      20
+   );
 ```
 
 <br/>
@@ -127,22 +199,88 @@ function findOneBy(array $criteria): array|null
 
 ### Parameters
 
-1. # $criteria: array
-   One or multiple where clauses. \* [["city", "=", "london"], ["age", ">", 18]]<br/>`WHERE city = "london" AND age > 18`
+1. # $criteria
+   One or multiple where conditions.<br/>
+   The criteria can be nested as much as needed.
+
+- [$fieldName, $condition, $value]
+- [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
+- [ [$fieldName, $condition, $value], OPERATION ,[$fieldName, $condition, $value], ... ]
+
+  - # $fieldName: string
+
+      The field name argument is the property that we want to check in our data object.
+
+      As our data object is basically a JSON document so it could have nested properties.
+
+      To target nested properties we use a single dot between the property/field name.
+
+      **Example:** From our above users object if we want to target the "country" property of a user, then we would pass `location.country` in this argument, because "location" is the parent property of the "country" property in our data object.
+
+  - # $condition: string
+
+      To apply the comparison filters we use this argument.
+
+      Allowed conditional operators are:
+
+      - `=` Match equal against data.
+      - `!=` Match not equal against data.
+      - `>` Match greater than against data.
+      - `>=` Match greater equal against data.
+      - `<` Match less than against data.
+      - `<=` Match less equal against data.
+      - `like` Match using wildcards.
+      - `not like` Match using wildcards. **Negation** of result.<br/>
+        Supported wildcards:
+          - `%` Represents zero or more characters<br/>
+            Example: bl% finds bl, black, blue, and blob
+          - `_` Represents a single character<br/>
+            Example: h_t finds hot, hat, and hit
+          - `[]` Represents any single character within the brackets<br/>
+            Example: h[oa]t finds hot and hat, but not hit
+          - `^` Represents any character not in the brackets<br/>
+            Example: h[^oa]t finds hit, but not hot and hat
+          - `-` Represents a range of characters<br/>
+            Example: c[a-b]t finds cat and cbt
+      - `in` $value has to be an `array`. Check if data is in given list. 
+      - `not in` $value has to be an `array`. Check if data is **not** in given list. 
 
 ### Return value
 
 Returns `one document` or `null` if nothing is found.
 
-### Examples
+### Example 1
 
 ```php
 $news = $newsStore->findOneBy(["author", "=", "Mike"]);
 // Returns one news article of the author called Mike
 ```
 
-#### Example result
+#### Result
 
 ```
 ["_id" => 18, "title" => "SleekDB is super fast", "author" => "Mike"]
+```
+
+
+### Example 2
+
+More complex where clause.
+
+```sql
+WHERE ( author = "John" OR author = "Mark" ) AND ( topic like "School%" OR topic like "Work%" )
+```
+
+```php
+$news = $newsStore->findOneBy(
+      [
+         [
+            ["author", "=", "John"], "OR", ["author", "=", "Mark"],
+         ],
+         "AND", // <-- Optional
+         [
+            ["topic", "like", "School%"], "OR", ["topic", "like", "Work%"]
+         ]
+      ]
+   );
 ```

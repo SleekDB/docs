@@ -66,7 +66,8 @@ function where(array $criteria): QueryBuilder
 ### Parameters
 
 1. # $criteria
-   One or multiple where conditions
+   One or multiple where conditions.<br/>
+   The criteria can be nested as much as needed.
 
 - [$fieldName, $condition, $value]
 - [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
@@ -110,7 +111,6 @@ function where(array $criteria): QueryBuilder
       - `in` $value has to be an `array`. Check if data is in given list. 
       - `not in` $value has to be an `array`. Check if data is **not** in given list. 
 
-
   - # $value
       Data that will be checked against the property value of the JSON documents.
 
@@ -119,7 +119,7 @@ function where(array $criteria): QueryBuilder
     The operation is optional and can be set to `AND` or `OR`.<br/>
     Default: `AND`
 
-### Examples
+### Example 1
 
 To only get the user whose country is equal to "England" we would query like this:
 
@@ -140,6 +140,8 @@ $userQueryBuilder->where( [ "name", "=", "Joshua Edwards" ] );
 // executing the query
 $users = $userQueryBuilder->getQuery()->fetch();
 ```
+
+### Example 2
 
 You can also use multiple `where` conditions.
 
@@ -179,6 +181,8 @@ $userQueryBuilder->where(
 $users = $userQueryBuilder->getQuery()->fetch();
 
 ```
+
+### Example 3
 
 Retrieve all users that have the status "premium", live in "london" or "new york" and are between the age of 16 and 20 or older than 30.
 
@@ -227,7 +231,8 @@ function orWhere(array $criteria): QueryBuilder
 ### Properties
 
 1. # $criteria
-   One or multiple where conditions
+   One or multiple where conditions.<br/>
+   The criteria can be nested as much as needed.
 
 - [$fieldName, $condition, $value]
 - [ [$fieldName, $condition, $value], [$fieldName, $condition, $value], ... ]
@@ -279,7 +284,7 @@ function orWhere(array $criteria): QueryBuilder
     The operation is optional and can be set to `AND` or `OR`.<br/>
     Default: `AND`
 
-### Examples
+### Example 1
 
 Retrieve all users that have `(products.totalSaved > 10 AND products.totalBought > 20) OR products.shipped = 1`
 
@@ -296,6 +301,8 @@ $users = $userQueryBuilder
   ->fetch();
 ```
 
+### Example 2
+
 Retrieve all users that have `products.totalSaved > 10 OR (products.totalBought > 20 AND products.shipped = 1) OR totalBought = 0`
 
 ```php
@@ -311,6 +318,8 @@ $users = $userQueryBuilder
   ->getQuery()
   ->fetch();
 ```
+
+### Example 3
 
 Retrieve all users that have the status "premium" or live in "london" or "new york" and are between the age of 16 and 20 or older than 30.
 
@@ -372,7 +381,8 @@ function nestedWhere(array $conditions): QueryBuilder
 ### Properties
 
 1. # $conditions
-   Multiple where conditions
+   Multiple where conditions.<br/>
+   The criteria can be nested as much as needed.
 
 - Small Example:<br/>
   [ "OUTERMOST_OPERATION" => [ [$fieldName, $condition, $value], "OPERATION", [$fieldName, $condition, $value] ] ]
@@ -428,7 +438,7 @@ function nestedWhere(array $conditions): QueryBuilder
 
     
 
-### Examples
+### Example 1
 
 Retrieve all users whos name start with "a" or "b", that have products.totalSaved > 10 and products totalBought > 10 and are between 16 and 20 or 24 and 28 years old.
 
@@ -476,6 +486,8 @@ $users = $userQueryBuilder
   ->getQuery()
   ->fetch();
 ```
+
+### Example 2
 
 Retrieve all users that have the status "premium", live in "london" and are between the age of 16 and 20 or older than 30.
 
@@ -605,7 +617,7 @@ function select(array $fieldNames): QueryBuilder
 1. # $fieldNames: array
    Specify specific fields to output.
 
-### Examples
+### Example
 
 Retrieve just the name of all users.
 
@@ -628,7 +640,7 @@ function except(array $fieldNames): QueryBuilder
 1. # $fieldNames: array
    Specify specific fields to exclude from the output.
 
-### Examples
+### Example
 
 Retrieve all information of an user except its \_id and name.
 
@@ -653,7 +665,7 @@ distinct( array|string $fields ): QueryBuilder;
 1. # $fields: array|string
    Specify one or multiple fields you want to be distinct.
 
-### Examples
+### Example
 
 Retrieve all users, but just the first user if there is another one with the same name.
 
@@ -684,7 +696,7 @@ function skip(int $skip = 0): QueryBuilder
 1. # $skip: int
    The value how many documents should be skipped.
 
-### Examples
+### Example
 
 Retrieve all users except the first 10 found.
 
@@ -708,7 +720,7 @@ function limit($limit = 0): QueryBuilder
 1. $limit: int
    Limit the amount of values in the result set. Has to be greater than 0.
 
-### Examples
+### Example
 
 Retrieve just the first ten users.
 
@@ -731,13 +743,14 @@ function orderBy( array $criteria): QueryBuilder
 
 1. # $criteria: array
 
-- [ $fieldName => $order [, ...] ]
+- [ $fieldName => $order ]
+- [ $fieldName => $order, $fieldName => $order, ... ]
   - # $fieldName: string
     Name of the field that will be used to sort the result.
   - # $order: string
     Either `desc` for a descending sort or `asc` for a ascending sort.
 
-### Examples
+### Example 1
 
 Retrieve all users sorted by their name.
 
@@ -753,6 +766,8 @@ $users = $userQueryBuilder
 ```
 [["_id" => 13, "name" => "Anton"], ["_id" => 2, "name" => "Berta"], ...]
 ```
+
+### Example 2
 
 Retrieve all users sorted by their name and age.
 
@@ -789,7 +804,7 @@ function search(string|array $fields, string $keyword): QueryBuilder
 2. $keyword: string
    Value that will be searched by.
 
-### Examples
+### Example
 
 Find all articles that include the word "SleekDB" in their description.
 

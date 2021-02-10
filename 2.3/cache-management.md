@@ -42,7 +42,7 @@ function useCache(int $lifetime = null): QueryBuilder
 - `int`<br/>
   Cache lifetime in seconds. `0` means infinite lifetime.
 
-### Examples
+### Example 1
 
 Retrieve and cache 20 users that are active.
 
@@ -78,6 +78,8 @@ $users = $userQueryBuilder
     ->fetch();
 ```
 
+### Example 2
+
 Retrieve and cache result for 2 minutes, 20 users that are active.
 
 ```php
@@ -89,6 +91,8 @@ $users = $userQueryBuilder
     ->getQuery()
     ->fetch();
 ```
+
+### Example 3
 
 Retrieve and cache result forever, 20 users that are active.
 
@@ -133,7 +137,7 @@ Regenerate the cache of a query regardless of its lifetime.
 function regenerateCache(): QueryBuilder
 ```
 
-### Examples
+### Example
 
 ```php
 // cache with infinite lifetime
