@@ -18,13 +18,13 @@ $userQuery = $userQueryBuilder->getQuery();
 
 ## Summary
 
-- fetch
-- first
-- exists
-- update
-- delete
+- <a class="gotoblock" href="#/query#fetch">fetch</a>
+- <a class="gotoblock" href="#/query#first">first</a>
+- <a class="gotoblock" href="#/query#exists">exists</a>
+- <a class="gotoblock" href="#/query#update">update</a>
+- <a class="gotoblock" href="#/query#delete">delete</a>
 
-## fetch()
+## fetch() {#query-fetch}
 
 Execute a query and retrieve an array containing all documents found.
 
@@ -65,7 +65,7 @@ $user = $userQueryBuilder
 ]
 ```
 
-## first()
+## first() {#query-first}
 
 It is more efficient than `fetch` but one caveat is that the `orderBy` will not work when using this method to get the very first item.
 
@@ -96,7 +96,7 @@ $user = $userQueryBuilder
 ]
 ```
 
-## exists()
+## exists() {#query-exists}
 
 It is more efficient than using `fetch` to check if some data exists or not. For example, you may use exists method to check if a username or email address already exists or not.
 
@@ -117,7 +117,7 @@ $userNameExists = $userQueryBuilder
   ->exists();
 ```
 
-## update()
+## update() {#query-update}
 
 Update one or multiple documents based on a given query.
 
@@ -146,7 +146,7 @@ $userStore
   ->update([ "status" => "VIP" ]);
 ```
 
-## delete()
+## delete() {#query-delete}
 
 Delete one or multiple documents based on a given query.
 

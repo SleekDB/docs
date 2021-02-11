@@ -22,17 +22,17 @@ $cache = $userQuery->getCache();
 
 ## Summary
 
-- getToken
-- delete
-- deleteAll
-- deleteAllWithNoLifetime
-- set
-- get
-- getCachePath
-- setLifetime
-- getLifetime
+- <a class="gotoblock" href="#/cache#getToken">getToken</a>
+- <a class="gotoblock" href="#/cache#delete">delete</a>
+- <a class="gotoblock" href="#/cache#deleteAll">deleteAll</a>
+- <a class="gotoblock" href="#/cache#deleteAllWithNoLifetime">deleteAllWithNoLifetime</a>
+- <a class="gotoblock" href="#/cache#set">set</a>
+- <a class="gotoblock" href="#/cache#get">get</a>
+- <a class="gotoblock" href="#/cache#getCachePath">getCachePath</a>
+- <a class="gotoblock" href="#/cache#setLifetime">setLifetime</a>
+- <a class="gotoblock" href="#/cache#getLifetime">getLifetime</a>
 
-## getToken()
+## getToken() {#cache-getToken}
 
 Returns the unique token for the current query, that will be used to save and retrieve a cache file.
 
@@ -44,7 +44,7 @@ function getToken(): string
 
 The unique token for the current query as a `string`.
 
-## delete()
+## delete() {#cache-delete}
 
 Deletes the cache file for the current query.
 
@@ -52,7 +52,7 @@ Deletes the cache file for the current query.
 function delete()
 ```
 
-## deleteAll()
+## deleteAll() {#cache-deleteAll}
 
 Delete all cache files of current store.
 
@@ -60,7 +60,7 @@ Delete all cache files of current store.
 function deleteAll()
 ```
 
-## deleteAllWithNoLifetime()
+## deleteAllWithNoLifetime() {#cache-deleteAllWithNoLifetime}
 
 Delete all cache files that have no lifetime (null) of current store.
 
@@ -68,7 +68,7 @@ Delete all cache files that have no lifetime (null) of current store.
 function deleteAllWithNoLifetime()
 ```
 
-## set()
+## set() {#cache-set}
 
 Set and cache the content for the current query / token.
 
@@ -81,7 +81,7 @@ function set(array $content)
 1. # $content: array
   The content that will be cached.
 
-## get()
+## get() {#cache-get}
 
 Retrieve the content of the cache file for the current query / token.
 
@@ -93,7 +93,7 @@ function get(): array|null
 
 The content as an `array` or `null` if no cache file found.
 
-## getCachePath()
+## getCachePath() {#cache-getCachePath}
 
 Returns the path to the cache directory.
 
@@ -101,7 +101,7 @@ Returns the path to the cache directory.
 function getCachePath(): string
 ```
 
-## setLifetime()
+## setLifetime() {#cache-setLifetime}
 
 Set the lifetime for the current query / token.
 
@@ -116,7 +116,7 @@ function setLifetime(int|null $lifetime): Cache
   - `null` no cache lifetime
     - Cache gets deleted on every update / delete / insert.
 
-## getLifetime()
+## getLifetime() {#cache-getLifetime}
 
 Get the lifetime for the current query / token.
 

@@ -20,11 +20,11 @@ $userQueryBuilder = $userStore->createQueryBuilder();
 
 ## Summary
 
-- useCache
-- disableCache
-- regenerateCache
+- <a class="gotoblock" href="#/cache-management#useCache">useCache</a>
+- <a class="gotoblock" href="#/cache-management#disableCache">disableCache</a>
+- <a class="gotoblock" href="#/cache-management#regenerateCache">regenerateCache</a>
 
-## useCache()
+## useCache() {#cache-management-useCache}
 
 With the useCache method you can `activate caching` and define the `cache lifetime` on a query by query bases.
 
@@ -106,7 +106,7 @@ $users = $userQueryBuilder
     ->fetch();
 ```
 
-## disableCache()
+## disableCache() {#cache-management-disableCache}
 
 Disable the build in caching solution on a query by query bases.<br/>
 By default caching is enabled store wide. If you want to disable caching store instead of disabling it on a query by query bases visit the store <a class="gotoblock" href="/#/configurations">configurations</a> page.
@@ -129,7 +129,7 @@ $users = $userQueryBuilder
     ->fetch();
 ```
 
-## regenerateCache()
+## regenerateCache() {#cache-management-regenerateCache}
 
 Regenerate the cache of a query regardless of its lifetime.
 

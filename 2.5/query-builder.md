@@ -16,23 +16,23 @@ $userQueryBuilder = $userStore->createQueryBuilder();
 
 ## Summary
 
-- getQuery
-- where
-- orWhere
-- ~~nestedWhere~~ ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
-- ~~in~~ ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
-- ~~notIn~~  ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
-- select
-- except
-- distinct
-- skip
-- limit
-- orderBy
-- search
-- Cache management
-- join
+- <a class="gotoblock" href="#/query-builder#getQuery">getQuery</a>
+- <a class="gotoblock" href="#/query-builder#where">where</a>
+- <a class="gotoblock" href="#/query-builder#orWhere">orWhere</a>
+- ~~<a class="gotoblock" href="#/query-builder#nestedWhere">nestedWhere</a>~~ ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
+- ~~<a class="gotoblock" href="#/query-builder#in">in</a>~~ ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
+- ~~<a class="gotoblock" href="#/query-builder#notIn">notIn</a>~~  ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
+- <a class="gotoblock" href="#/query-builder#select">select</a>
+- <a class="gotoblock" href="#/query-builder#except">except</a>
+- <a class="gotoblock" href="#/query-builder#distinct">distinct</a>
+- <a class="gotoblock" href="#/query-builder#skip">skip</a>
+- <a class="gotoblock" href="#/query-builder#limit">limit</a>
+- <a class="gotoblock" href="#/query-builder#orderBy">orderBy</a>
+- <a class="gotoblock" href="#/query-builder#search">search</a>
+- <a class="gotoblock" href="#/query-builder#cache-management">Cache management</a>
+- <a class="gotoblock" href="#/query-builder#join">join</a>
 
-## getQuery()
+## getQuery() {#query-builder-getQuery}
 
 With the `getQuery` method of the QueryBuilder class you can **`retrieve the Query object to execute the query`**.
 
@@ -55,7 +55,7 @@ The most important methods of the Query class to execute a query are:
 
 For more details on query execution please visit the <a class="gotoblock" href="/#/query">Query</a> page.
 
-## where()
+## where() {#query-builder-where}
 
 To filter data we use the where() method of the QueryBuilder object.<br/>If you provide multiple conditions they are connected with an `AND`.
 
@@ -229,7 +229,7 @@ $users = $userQueryBuilder
   ->fetch();
 ```
 
-## orWhere()
+## orWhere() {#query-builder-orWhere}
 
 `orWhere(...)` works as the OR condition of SQL. SleekDB supports multiple orWhere as object chain.<br/>If you provide multiple conditions they are connected with an `AND`.
 
@@ -377,7 +377,7 @@ $users = $userQueryBuilder
 ```
 
 
-## ~~nestedWhere()~~
+## ~~nestedWhere()~~ {#query-builder-nestedWhere}
 
 > ### 🚨 Deprecated since version 2.3, use `where` and `orWhere` instead!
 
@@ -545,7 +545,7 @@ $users = $userQueryBuilder
   ->fetch();
 ```
 
-### ~~in()~~
+### ~~in()~~ {#query-builder-in}
 
 > ### 🚨 Deprecated since version 2.3, use `where` and `orWhere` instead!
 
@@ -588,7 +588,7 @@ $users = $userQueryBuilder
   ->fetch();
 ```
 
-## ~~notIn()~~
+## ~~notIn()~~ {#query-builder-notIn}
 
 > ### 🚨 Deprecated since version 2.3, use `where` and `orWhere` instead!
 
@@ -636,7 +636,7 @@ $users = $userQueryBuilder
   ->fetch();
 ```
 
-## select()
+## select(){#query-builder-select}
 
 With select(...) you can specify specific fields to output, like after the SELECT keyword in SQL. SleekDB supports multiple `select()` as object chain for multiple fields.
 
@@ -661,7 +661,7 @@ $users = $userQueryBuilder
 // output: [["_id" => 1, "name" => "Max"], ["_id" => 2, "name" => "Hasan"]]
 ```
 
-## except()
+## except() {#query-builder-except}
 
 `except(...)` works as the opposite of `select()` method. Use it when you don't want a property in the result. For example, if you don't want the password field in your returned data set.
 
@@ -684,7 +684,7 @@ $users = $userQueryBuilder
 // output: [["age": 28], ["age": 18]]
 ```
 
-## distinct()
+## distinct() {#query-builder-distinct}
 
 The distinct method is used to retrieve unique values from the store. It will remove all the duplicate documents while fetching data from a store.
 
@@ -715,7 +715,7 @@ $distinctUsers = $userQueryBuilder
   ->fetch();
 ```
 
-## skip()
+## skip() {#query-builder-skip}
 
 Skip works as the OFFSET clause of SQL. You can use this to skip a specific amount of documents.
 
@@ -739,7 +739,7 @@ $users = $userQueryBuilder
   ->fetch();
 ```
 
-## limit()
+## limit() {#query-builder-limit}
 
 Works as the LIMIT clause of SQL. You can use this to limit the results to a specific amount.
 
@@ -763,7 +763,7 @@ $users = $userQueryBuilder
   ->fetch();
 ```
 
-## orderBy()
+## orderBy() {#query-builder-orderBy}
 
 Works as the ORDER BY clause of SQL. With this method you can sort the result. You can use this method to sort the result by one or multiple fields.
 
@@ -821,7 +821,7 @@ $users = $userQueryBuilder
 ]
 ```
 
-## search()
+## search() {#query-builder-search}
 
 Do a fulltext like search against one or multiple fields.
 
@@ -847,13 +847,13 @@ $articles = $articleQueryBuilder
   ->fetch();
 ```
 
-## Cache management
+## Cache management {#query-builder-cache-management}
 
 The QueryBuilder provides the `useCache`, `disableCache` and `regenerateCache` methods to manage caching on a query by query base.
 
 Please visit the <a class="gotoblock" href="/#/cache-management">Cache Management</a> page for more details.
 
-## join()
+## join() {#query-builder-join}
 
 This method is used to join two or multiple stores together.
 

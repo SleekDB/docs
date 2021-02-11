@@ -10,10 +10,10 @@
 
 SleekDB allows a few configuration options, which are
 
-- auto_cache
-- cache_lifetime
-- timeout
-- primary_key
+- <a class="gotoblock" href="#/configurations#auto_cache">auto_cache</a>
+- <a class="gotoblock" href="#/configurations#cache_lifetime">cache_lifetime
+- <a class="gotoblock" href="#/configurations#timeout">timeout</a>
+- <a class="gotoblock" href="#/configurations#primary_key">primary_key</a>
 
 They are store wide, which means they will be used on every query, if not changed on a query by query base.
 
@@ -33,7 +33,7 @@ $newsStore = new \SleekDB\Store("news", $dataDir, $configuration);
 
 Let's get familiar with the available configuration options.
 
-### auto_cache
+### auto_cache {#configurations-auto_cache}
 
 The `auto_cache` is set to `true` by default!
 
@@ -48,7 +48,7 @@ Available caching method's are:
 - `QueryBuilder->useCache()`
 - `QueryBuilder->disableCache()`
 
-### cache_lifetime
+### cache_lifetime {#configurations-cache_lifetime}
 
 The `cache_lifetime` is set to `null` by default!
 
@@ -66,11 +66,11 @@ Note that you can specify the cache lifetime on a query by query base by using t
 
 > Note: You will find more details on caching at <a class="gotoblock" href="/#/cache-management">Cache Management</a>
 
-### timeOut
+### timeout {#configurations-timeout}
 
 Set timeout value. Default value is `120` seconds.
 
-### primary_key
+### primary_key {#configurations-primary_key}
 
 Set the primary key into any string you want.<br/>
 SleekDB will then use that key instead of the default `_id` key.
