@@ -14,10 +14,10 @@ To delete documents you can use the `deleteBy()` and `deleteById()` methods of t
 
 ## Summary
 
-- deleteBy
-- deleteById
+- <a class="gotoblock" href="#/delete-data#deleteBy">deleteBy</a>
+- <a class="gotoblock" href="#/delete-data#deleteById">deleteById</a>
 
-## Delete one or multiple documents
+## Delete one or multiple documents {#delete-data-deleteBy}
 
 ```php
 function deleteBy(array $criteria, int $returnOption = Query::DELETE_RETURN_BOOL): array|bool|int
@@ -150,7 +150,7 @@ $userStore->deleteBy(
 
 <br/>
 
-## Delete one document with its \_id
+## Delete one document with its \_id {#delete-data-deleteById}
 
 This method is especially fast because SleekDB uses the \_id to directly delete the document and does not traverse through all files.
 

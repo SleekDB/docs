@@ -12,10 +12,10 @@ To insert data first you make a PHP array, and simply insert that array into a s
 
 ## Summary
 
-- insert
-- insertMany
+- <a class="gotoblock" href="#/insert-data#insert">insert</a>
+- <a class="gotoblock" href="#/insert-data#insertMany">insertMany</a>
 
-## Insert a single document
+## Insert a single document {#insert-data-insert}
 
 ```php
 function insert(array $data): array
@@ -52,7 +52,7 @@ $user = $userStore->insert($user);
 
 <br/>
 
-## Insert multiple documents
+## Insert multiple documents {#insert-data-insertMany}
 
 ```php
 function insertMany(array $data): array
