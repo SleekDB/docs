@@ -14,12 +14,12 @@ To get data from the store SleekDB provides some simple yet powerful methods.
 
 ## Summary
 
-- findAll
-- findById
-- findBy
-- findOneBy
+- <a class="gotoblock" href="#/fetch-data#findAll">findAll</a>
+- <a class="gotoblock" href="#/fetch-data#findById">findById</a>
+- <a class="gotoblock" href="#/fetch-data#findBy">findBy</a>
+- <a class="gotoblock" href="#/fetch-data#findOneBy">findOneBy</a>
 
-## Get all documents
+## Get all documents {#fetch-data-findAll}
 
 ```php
 function findAll(): array
@@ -43,7 +43,7 @@ $allNews = $newsStore->findAll();
 
 <br/>
 
-## Get a single document with its \_id
+## Get a single document with its \_id {#fetch-data-findById}
 
 With this method SleekDB doesn't traverse through all files. Instead, it accesses the file directly, what makes this method especially fast.
 
@@ -74,7 +74,7 @@ $news = $newsStore->findById(12);
 
 <br/>
 
-## Get one or multiple documents
+## Get one or multiple documents {#fetch-data-findBy}
 
 ```php
 function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array|null
@@ -200,7 +200,7 @@ $news = $newsStore->findBy(
 
 <br/>
 
-## Get one document.
+## Get one document. {#fetch-data-findOneBy}
 
 ```php
 function findOneBy(array $criteria): array|null
