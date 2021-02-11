@@ -12,7 +12,7 @@
 
 SleekDB 2.0 comes with so many important optimizations and other features that make it faster and more mature. This is the recommended SleekDB release version for new projects, and if you are using an older version consider upgrading as soon as possible.
 
-### Changes from 2.3 to 2.4
+### Changes from 2.4 to 2.5
 
 - # ✨ New conditions:
   The following conditions can now be used with the `findBy()`, `findOneBy()`, `deleteBy()`, `where()` and `orWhere()` methods!
