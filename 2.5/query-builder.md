@@ -20,8 +20,8 @@ $userQueryBuilder = $userStore->createQueryBuilder();
 - <a class="gotoblock" href="#/query-builder#where">where</a>
 - <a class="gotoblock" href="#/query-builder#orWhere">orWhere</a>
 - ~~<a class="gotoblock" href="#/query-builder#nestedWhere">nestedWhere</a>~~ ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
-- ~~<a class="gotoblock" href="#/query-builder#in">in</a>~~ ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
-- ~~<a class="gotoblock" href="#/query-builder#notIn">notIn</a>~~  ( 🚨 Deprecated since version 2.3, use where and orWhere instead! )
+- ~~<a class="gotoblock" href="#/query-builder#in">in</a>~~ ( 🚨 Deprecated since version 2.4, use where and orWhere instead! )
+- ~~<a class="gotoblock" href="#/query-builder#notIn">notIn</a>~~  ( 🚨 Deprecated since version 2.4, use where and orWhere instead! )
 - <a class="gotoblock" href="#/query-builder#select">select</a>
 - <a class="gotoblock" href="#/query-builder#except">except</a>
 - <a class="gotoblock" href="#/query-builder#distinct">distinct</a>
