@@ -128,7 +128,9 @@ function update(array $updatable, bool $returnUpdatedDocuments = false): array|b
 ### Parameters
 
 1. # $updatable: array
-   An array containing the properties to update.
+   An array containing the properties to update.<br/>
+   Update of nested values possible by using a dot between fieldNames (Example 2)<br/>
+   If a property does not exist in a document, it will be added.
 
 ### Return value
 If **$returnUpdatedDocuments = false**:<br/>
@@ -159,6 +161,22 @@ $userStore
   ->createQueryBuilder()
   ->where("city", "=", "london")
   ->update([ "address.street" => "first street" ]);
+```
+
+#### Result
+
+```php
+[
+  [
+    "city" => "london".
+    "address" => [
+      "street" => "first street",
+      "postalCode" => "41824"
+    ],
+    ...
+  ],
+  ...
+]
 ```
 
 ## delete() {#query-delete}
