@@ -31,7 +31,9 @@ function updateById(int $id, array $updatable): array|false
 1. # $id: int
    Id of document to update.
 2. # $updatable: array
-   Array containing the parts to update.
+   Array containing the parts to update.<br/>
+   Update of nested values possible by using a dot between fieldNames (Example 3)<br/>
+   If a field does not exist in that document, it will be added.
 
 ### Return value
 Returns `updated document` on success or `false` if document could not be found.
@@ -55,10 +57,23 @@ $userStore->updateById(24, [ "name" => "Georg", "age" => 22 ]);
 ### Example 3
 
 Change the street of the user with \_id = 24.<br/>
-**Note**: The street is in a nested array.
+**Note**: The street is stored in a nested array.
 
 ```php
 $userStore->updateById(24, [ "address.street" => "first street" ]);
+```
+
+#### Result
+
+```php
+[
+    "_id" => 24,
+    "address" => [
+        "street" => "first street",
+        "postalCode" => "47129"
+    ],
+    ...
+]
 ```
 
 
