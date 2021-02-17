@@ -130,7 +130,7 @@ function update(array $updatable, bool $returnUpdatedDocuments = false): array|b
 1. # $updatable: array
    An array containing the properties to update.<br/>
    Update of nested values possible by using a dot between fieldNames (Example 2)<br/>
-   If a property does not exist in a document, it will be added.
+   If a field does not exist in a document, it will be added.
 
 ### Return value
 If **$returnUpdatedDocuments = false**:<br/>

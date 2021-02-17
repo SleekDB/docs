@@ -33,7 +33,7 @@ function updateById(int $id, array $updatable): array|false
 2. # $updatable: array
    Array containing the parts to update.<br/>
    Update of nested values possible by using a dot between fieldNames (Example 3)<br/>
-   If a property does not exist in that document, it will be added.
+   If a field does not exist in that document, it will be added.
 
 ### Return value
 Returns `updated document` on success or `false` if document could not be found.
