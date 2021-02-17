@@ -20,7 +20,7 @@ To edit a data object you can use the `update()` and `updateById()` method of th
 ## updateById() {#edit-data-updateById}
 
 Update parts of a document.<br/>
-This method is especially fast because it uses the \_id of the given document to update it directly instead of traversing through all documents.
+This method is especially fast because it uses the \_id to update the document directly instead of traversing through all documents.
 
 ```php
 function updateById(int $id, array $updatable): array|false
@@ -80,7 +80,7 @@ $userStore->updateById(24, [ "address.street" => "first street" ]);
 ## update() {#edit-data-update}
 
 Update a whole document.<br/>
-This method is especially fast because it uses the \_id of the given document to update it directly instead of traversing through all documents.
+This method is especially fast because it uses the \_id of the given document/s to update it directly instead of traversing through all documents.
 
 ```php
 function update(array $updatable): bool;
