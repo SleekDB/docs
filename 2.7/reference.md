@@ -208,7 +208,7 @@ function search(string|array $fields, string $query, array $options = []): Query
 
 Join current store with another one. Can be used multiple times to join multiple stores.
 ```php
-function join(Closure $joinFunction, string $dataPropertyName): QueryBuilder
+function join(Closure $joinFunction, string $propertyName): QueryBuilder
 ```
 
 Return distinct values.
