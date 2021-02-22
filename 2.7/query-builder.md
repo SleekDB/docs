@@ -544,7 +544,7 @@ $users = $userQueryBuilder
 Works as the ORDER BY clause of SQL. With this method you can sort the result. You can use this method to sort the result by one or multiple fields.
 
 ```php
-function orderBy( array $criteria): QueryBuilder
+function orderBy(array $criteria): QueryBuilder
 ```
 
 ### Parameters
@@ -812,7 +812,7 @@ $productQueryBuilder
 Do a fulltext like search against one or multiple fields.
 
 ```php
-function search($fields, string $query, array $options = []): QueryBuilder
+function search(array|string $fields, string $query, array $options = []): QueryBuilder
 ```
 
 > Please visit the <a class="gotoblock" href="#/searching">"Searching" documentation</a> for more details and examples!
@@ -843,7 +843,7 @@ function search($fields, string $query, array $options = []): QueryBuilder
 The distinct method is used to retrieve unique values from the store. It will remove all the duplicate documents while fetching data from a store.
 
 ```php
-distinct( array|string $fields ): QueryBuilder;
+function distinct(array|string $fields): QueryBuilder
 ```
 
 ### Parameters
@@ -882,7 +882,7 @@ This method is used to join two or multiple stores together.
 For more details please visit the <a class="gotoblock" href="/#/join-stores">Join Stores</a> page.
 
 ```php
-function join(Closure $joinedStore, string $dataPropertyName): QueryBuilder
+function join(Closure $joinedStore, string $propertyName): QueryBuilder
 ```
 
 ## ~~nestedWhere()~~ {#query-builder-nestedWhere}

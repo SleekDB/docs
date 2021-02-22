@@ -50,7 +50,7 @@ To join stores we use the join() method of the QueryBuilder object.
 The join() method takes two arguments, those are:
 
 ```php
-function join(Closure $joinFunction, string $dataPropertyName): QueryBuilder
+function join(Closure $joinFunction, string $propertyName): QueryBuilder
 ```
 
 ### Parameters
@@ -59,7 +59,7 @@ function join(Closure $joinFunction, string $dataPropertyName): QueryBuilder
 
    This anonymous function has to return the `result of an executed sub query` or prepare a sub query for the join and return it as a `QueryBuilder object`.
 
-2. # $dataPropertyName: string
+2. # $propertyName: string
 
    Name of the new property added to each document.
 
