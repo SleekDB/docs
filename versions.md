@@ -8,7 +8,8 @@
 
 # Versions
 
-- **[2.6](/) (Actively Maintained Version)**
+- **[2.7](/) (Actively Maintained Version)**
+- **[2.6](/versions/2.6/)**
 - **[2.5](/versions/2.5/)**
 - **[2.4](/versions/2.4/)**
 - **[2.3](/versions/2.3/)**
