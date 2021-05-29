@@ -56,7 +56,7 @@ $newUser = [
   "username" => "Bob",
   "age" => 20,
   "address" => [
-    "street" => "down street"
+    "street" => "down street",
     "streetNumber" => 12,
     "postalCode" => "8174",
   ],
@@ -102,7 +102,7 @@ $newUsers = [
     "username" => "Lisa",
     "age" => 17,
     "address" => [
-      "street" => "up street"
+      "street" => "up street",
       "streetNumber" => 48,
       "postalCode" => "1822",
     ],
@@ -111,7 +111,7 @@ $newUsers = [
     "username" => "Bob",
     "age" => 20,
     "address" => [
-      "street" => "down street"
+      "street" => "down street",
       "streetNumber" => 12,
       "postalCode" => "8174",
     ],
