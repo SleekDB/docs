@@ -31,7 +31,7 @@ SleekDB 2.X comes with so many important optimizations and other features that m
 - <a class="gotoblock" href="#/release-notes#2.0">Changes from 1.5 to 2.0</a>
 
 
-## Changes from 2.12 to 2.13 {#release-notes-2.14}
+## Changes from 2.13 to 2.14 {#release-notes-2.14}
 
 - # 🚨 Fixed bug regarding internal escaping when using `LIKE` and `NOT LIKE`
 - # 🌈 New ability to escape wildcards
