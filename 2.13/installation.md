@@ -29,13 +29,25 @@ Find SleekDB on **<a rel="noopener nofollow" href="https://packagist.org/package
 
 ## Install Manually (without composer)
 
-- <a rel="noopener nofollow" href=" https://github.com/rakibtg/SleekDB/archive/master.zip">Download</a> the latest version and extract the ZIP file inside your project directory.
+- <a rel="noopener nofollow" href="https://github.com/rakibtg/SleekDB/releases/">Download</a> the latest version and extract the TAR.GZ/ZIP file inside your project directory. You might soft-link the versioned Folder to "SleekDB" or rename it
+
+  Example:
+   
+  ```bash
+  #get the source and extract it ( replace X.YY with the desired release number)
+  curl https://github.com/rakibtg/SleekDB/archive/refs/tags/X.YY.tar.gz -Ls |tar xvz
+  
+  # soft-link the current version to the "standard" name , e.g. ln -s SleekDB-2.15/ SleekDB , remember to have no SleekDB folder/file before this step
+  ln -s SleekDB-X.YY/ SleekDB 
+  
+  ```
+
 - Import the SleekDB.php file where you want to use SleekDB.
 
   Example:
 
   ```php
-  require_once "../SleekDB/Store.php";
+  require_once "../SleekDB/src/Store.php";
   ```
 
 To download older versions please check the <a rel="noopener nofollow" target="_blank" title="Click here to download old versions" href="https://github.com/rakibtg/SleekDB/releases">releases</a>.
