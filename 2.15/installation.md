@@ -29,7 +29,7 @@ Find SleekDB on **<a rel="noopener nofollow" href="https://packagist.org/package
 
 ## Install Manually (without composer)
 
-- <a rel="noopener nofollow" href=" https://github.com/rakibtg/SleekDB/archive/master.zip">Download</a> the latest version and extract the ZIP file inside your project directory.
+- <a rel="noopener nofollow" href=" https://github.com/SleekDB/SleekDB/archive/master.zip">Download</a> the latest version and extract the ZIP file inside your project directory.
 - Import the SleekDB.php file where you want to use SleekDB.
 
   Example:
@@ -38,7 +38,7 @@ Find SleekDB on **<a rel="noopener nofollow" href="https://packagist.org/package
   require_once "../SleekDB/Store.php";
   ```
 
-To download older versions please check the <a rel="noopener nofollow" target="_blank" title="Click here to download old versions" href="https://github.com/rakibtg/SleekDB/releases">releases</a>.
+To download older versions please check the <a rel="noopener nofollow" target="_blank" title="Click here to download old versions" href="https://github.com/SleekDB/SleekDB/releases">releases</a>.
 
 ## Using dev version (Not recommended)
 
